@@ -20,7 +20,7 @@ pygmentsCodefencesGuessSyntax = true
 
 [params]
 title = "vnord"
-author = "Ari von Nordenskjöld"
+author = "vnord"
 #copyright = "2020-2021"
 description = "master of many vnords"
 profilePicture = "images/profile.jpg"
