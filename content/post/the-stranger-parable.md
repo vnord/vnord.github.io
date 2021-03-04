@@ -1,6 +1,8 @@
 ---
 title: The Stranger Parable
 date: 2015-08-04
+categories: [ books ]
+description: Reflections on Camus' book The Stranger.
 ---
 
 After reading Albert Camus' *L'étranger* as my first French novel (the

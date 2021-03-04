@@ -1,6 +1,8 @@
 ---
 title: They Are All Equal Now
 date: 2015-08-16
+categories: [ films ]
+description: Reflections on Kubrick's film Barry Lyndon.
 ---
 
 > "No;—nor is there any sin more fearfully avenged on men and Nations than that

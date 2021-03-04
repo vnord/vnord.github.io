@@ -1,9 +1,8 @@
 ---
 title: Art and Deception
 date: 2015-09-05
-tags: [
-  test
-]
+categories: [ art, films ]
+description: It did look a bit rushed.
 ---
 
 >"I did think it looked a bit rushed."

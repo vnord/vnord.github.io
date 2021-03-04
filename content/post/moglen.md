@@ -1,6 +1,8 @@
 ---
 title: Moglen
 date: 2019-03-23
+categories: [ technology ]
+description: My favourite quote.
 ---
 
 The following quote is so good that no commentary can improve upon it.  The

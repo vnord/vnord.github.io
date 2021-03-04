@@ -1,6 +1,8 @@
 ---
 title: Of Discord and Dilettantism
 date: 2015-08-10
+categories: [ books ]
+description: Reflections on Principia Discordia.
 ---
 
 *Principia Discordia* is a work that is simultaneously highly brilliant and

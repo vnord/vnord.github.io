@@ -1,6 +1,8 @@
 ---
 title: Europa
 date: 2015-06-01
+categories: [ films ]
+description: Reflections on Lars von Trier's film Europa.
 ---
 
 Lars von Trier is a highly interesting contemporary character. Having only seen

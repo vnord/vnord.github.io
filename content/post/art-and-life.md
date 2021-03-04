@@ -1,6 +1,8 @@
 ---
 title: Art and Life
 date: 2015-08-17
+categories: [ art ]
+description: Only eight left.
 ---
 
 >"Si en un incendio tuviera que escoger entre salvar a un gato o un
