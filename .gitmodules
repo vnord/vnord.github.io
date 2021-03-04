@@ -1,3 +1,3 @@
 [submodule "themes/anatole"]
 	path = themes/anatole
-	url = https://github.com/vnord/anatole.git
+	url = git@github.com:vnord/anatole.git
