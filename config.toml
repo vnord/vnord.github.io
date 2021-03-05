@@ -90,6 +90,12 @@ url = "mailto:ari@vnord.net"
   identifier = "about"
   url = "/about/"
 
+  [[menu.main]]
+  name = "CV"
+  weight = 400
+  identifier = "cv"
+  url = "/cv.pdf"
+
 #  [[menu.main]]
 #  name = "Contact"
 #  weight = 400
