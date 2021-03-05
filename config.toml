@@ -26,8 +26,7 @@ description = "master of many vnords"
 profilePicture = "images/profile.jpg"
 keywords = ""
 favicon = "favicons/"
-# example ["css/custom.css"]
-customCss = []
+customCss = ["css/syntax.css"]
 # example ["js/custom.js"]
 customJs = [] 
 mainSections = ["post"]
