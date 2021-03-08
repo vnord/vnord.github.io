@@ -30,7 +30,7 @@ alternative android version is too hard, I recommend buying refurbished phone
 from /e/). If you are not a modern degenerate and have no need of spending 8+
 hours per day poking at a smartphone, consider getting the upcoming
 [PinePhone](https://www.pine64.org/pinephone/), which will be best possible
-phone from the perspective of security/privacy/freedom
+phone from the perspective of security/privacy/freedom.
 
 # Watching youtube
 
