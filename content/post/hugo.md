@@ -5,7 +5,7 @@ categories: [ technology ]
 description: Simplifying my blogging work flow with Hugo, Sinatra, and Webhooks.
 ---
 
-## Prelude: Hakyll
+# Prelude: Hakyll
 
 This website has (as far as I can remember) always been statically generated.
 I've tried various static site generators -- mainly Jekyll, and its cousin
@@ -45,7 +45,7 @@ worked, but I `ctrl-c`'d the stack build in frustration after a couple of hours
 of building dependencies. I didn't want my pi to be an additional part of the
 deploy chain anyway.
 
-## Hugo
+# Hugo
 
 So I decided to switch from Hakyll to Hugo after seeing the [very nice
 theme](https://themes.gohugo.io/anatole/) that I am currently using. It did
@@ -67,7 +67,7 @@ hugo --minify -d /home/public/
 
 and voilà, we have a website!
 
-## Deployment
+# Deployment
 
 At this stage, I would would have to `ssh` into my web server every time I make
 an update, and pull in the changes before executing the above command.  Better
@@ -132,7 +132,7 @@ script via a CGI script. I tried typing my commands in a more aggressive manner
 in order to convince my web server that this indeed was serious business. I
 eventually gave up and decided to try a different approach.
 
-## Sinatra
+# Sinatra
 
 Github's [webhooks
 documentation](https://docs.github.com/en/developers/webhooks-and-events/webhooks)
