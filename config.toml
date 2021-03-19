@@ -1,4 +1,4 @@
-baseURL = "https://vnord.net"
+baseURL = "https://vnord.net/"
 languageCode = "en"
 DefaultContentLanguage = "en"
 title = "vnord"
