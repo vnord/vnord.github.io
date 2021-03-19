@@ -1,8 +1,8 @@
 baseURL = "https://vnord.net"
 languageCode = "en"
 DefaultContentLanguage = "en"
-title = "the vnordlog"
-theme = "anatole"
+title = "vnord"
+theme = "hugo-theme-console"
 summarylength = 10
 enableEmoji = true
 enableRobotsTXT = true
@@ -26,7 +26,7 @@ description = "master of many vnords"
 profilePicture = "images/profile.jpg"
 keywords = ""
 favicon = "favicons/"
-customCss = ["css/syntax.css"]
+customCss = ["css/custom.css"]
 # example ["js/custom.js"]
 customJs = [] 
 mainSections = ["post"]
@@ -67,6 +67,22 @@ url = "https://github.com/vnord"
 icon = "fas fa-envelope"
 title = "e-mail"
 url = "mailto:ari@vnord.net"
+
+### console theme
+
+titleCutting = true
+
+[[params.navlinks]]
+name = "posts/"
+url = "posts/"
+
+[[params.navlinks]]
+name = "photos/"
+url = "photos/"
+
+[[params.navlinks]]
+name = "cv/"
+url = "cv.pdf"
 
 ## Menu items
 
