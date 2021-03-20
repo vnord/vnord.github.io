@@ -2,7 +2,7 @@
 title: Suggested Software
 date: 2021-03-08
 categories: [ technology ]
-description: "A list of good privacy-preserving alternatives for commonly used software"
+description: A list of good privacy-preserving alternatives for commonly used software.
 ---
 
 *NB: this list was written a while ago in collaboration with a friend and in a
