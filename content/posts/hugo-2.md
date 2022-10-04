@@ -13,7 +13,7 @@ deploying with Github actions. I guess it may have been that I had never used th
 or mistakenly assumed I had to pay something for runners.
 
 But now I know better. Instead of the convoluted mess which I used before (which, to add insult to
-idiocy, also seems to have stopped work for some reason or other -- I haven't bothered figuring out
+idiocy, also seems to have stopped working for some reason or other -- I haven't bothered figuring out
 what it is), I just have [a very simple Github
 workflow](https://github.com/vnord/vnordnet/blob/master/.github/workflows/publish.yml). It took me 
 about 20 minutes to cobble it together, and my confidence that this will continue running for quite
