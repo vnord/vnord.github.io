@@ -1,5 +1,5 @@
 ---
-title: I was an idiot
+title: I was kinda dumb
 date: 2022-10-04
 categories: [ technology ]
 description: How I learned to stop worrying and love Github actions

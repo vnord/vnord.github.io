@@ -5,6 +5,8 @@ categories: [ technology ]
 description: Simplifying my blogging work flow with Hugo, Sinatra, and Webhooks.
 ---
 
+*Author's note on 2022-10-04: this post is kinda dumb, see [this post](../hugo-2).*
+
 # Prelude: Hakyll
 
 This website has (as far as I can remember) always been statically generated.
