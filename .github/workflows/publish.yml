@@ -25,5 +25,6 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
-          EXCLUDE: "/dist/, /node_modules/"
+          ARGS: "--delete"
+          EXCLUDE: "cv.pdf, de_cv.pdf, transcript.pdf, .bashrc, .zshrc"
 
