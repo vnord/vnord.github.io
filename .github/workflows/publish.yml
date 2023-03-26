@@ -27,4 +27,8 @@ jobs:
           TARGET: ${{ secrets.REMOTE_TARGET }}
           ARGS: "--delete"
           EXCLUDE: "cv.pdf, de_cv.pdf, transcript.pdf, .bashrc, .zshrc"
-
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
