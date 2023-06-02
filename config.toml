@@ -107,7 +107,7 @@ url = "cv.pdf"
   name = "CV"
   weight = 400
   identifier = "cv"
-  url = "/cv.pdf"
+  url = "cv.pdf"
 
 #  [[menu.main]]
 #  name = "Contact"
