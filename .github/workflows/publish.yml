@@ -17,16 +17,6 @@ jobs:
           hugo-version: '0.91.2'
       - name: Generate static site
         run: hugo --minify
-      - name: Deploy to website
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SOURCE: "public/"
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
-          ARGS: "--delete"
-          EXCLUDE: "cv.pdf, de_cv.pdf, transcript.pdf, .bashrc, .zshrc"
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
