@@ -4,6 +4,15 @@ import { personalInfo } from "@/config/personal-info";
 import { TimelineItem } from "./TimelineItem";
 import { useState } from "react";
 
+export interface TimelineItemProps {
+  title: string;
+  role: string;
+  description?: string;
+  isCurrentRole?: boolean;
+  highlights?: string[];
+  isExpanded: boolean;
+}
+
 export function Timeline() {
   const [expandedIndices, setExpandedIndices] = useState<Set<number>>(new Set());
 
@@ -34,7 +43,7 @@ export function Timeline() {
               period={item.period}
               title={item.title}
               role={item.role}
-              description={item.description}
+              description={item.description || ''}
               isCurrentRole={item.isCurrentRole}
               highlights={item.highlights}
               isExpanded={expandedIndices.has(index)}
