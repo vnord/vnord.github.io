@@ -1,0 +1,29 @@
+name: Publish to website
+on:
+  push:
+    branches:
+      - nextjs  # Changed from master to match your new branch
+
+jobs:
+  Publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  # or whatever version you're using
+
+      - name: Install dependencies
+        run: npm ci  # or yarn install --frozen-lockfile
+
+      - name: Build static site
+        run: npm run build  # This should run `next build && next export`
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out  # Next.js exports to 'out' directory by default

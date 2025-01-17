@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0a0a0c;
+  --foreground: #f8fafc;
+  --primary: #60a5fa;
+  --primary-rgb: 96, 165, 250;
+  --secondary: #cbd5e1;
+  --muted: rgba(248, 250, 252, 0.85);
+}
+
+@layer base {
+  body {
+    background: linear-gradient(135deg, #1E1E2E 0%, #2D1B69 50%, #1E1E2E 100%);
+    color: var(--foreground);
+    font-family: var(--font-inter);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
+    cursor: auto;
+  }
+
+  body:hover {
+    background: linear-gradient(135deg, #1E1E2E 0%, #2D1B69 50%, #1E1E2E 100%);
+  }
+
+  @media (min-width: 768px) {
+    body {
+      cursor: none;
+    }
+    
+    a, button {
+      cursor: none;
+    }
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl font-semibold tracking-tight;
+    line-height: 1.1;
+  }
+
+  h2 {
+    @apply text-2xl md:text-3xl font-medium tracking-tight;
+    line-height: 1.2;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl font-medium;
+    line-height: 1.3;
+  }
+
+  h4 {
+    @apply text-base md:text-lg font-normal text-secondary;
+    line-height: 1.4;
+  }
+
+  p {
+    @apply text-base text-muted;
+    line-height: 1.7;
+    max-width: 70ch;
+  }
+}
+
+.mono {
+  font-family: var(--font-geist-mono);
+  @apply text-sm tracking-tight;
+}
+
+.timeline-hover {
+  background-color: #60a5fa0a !important;
+  box-shadow: 0 0 20px #60a5fa1a !important;
+}
+
+.text-glow {
+  color: #60a5fa !important;
+  text-shadow: 0 0 10px #60a5fa66 !important;
+}
+
+.cursor-glow {
+  pointer-events: none;
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.15) 0%, transparent 70%);
+  z-index: 9999;
+  border-radius: 50%;
+}
+
+/* Modern typography styles */
+.prose-modern {
+  @apply text-base leading-relaxed;
+}
+
+.prose-modern h1 {
+  @apply text-4xl md:text-5xl font-bold tracking-tighter;
+}
+
+.prose-modern h2 {
+  @apply text-2xl md:text-3xl font-bold tracking-tight;
+}
+
+.prose-modern h3 {
+  @apply text-xl md:text-2xl font-semibold;
+}
+
+.prose-modern p {
+  @apply text-muted mb-4;
+}
+
+.py-20 {
+  padding-top: 5rem;
+  padding-bottom: 0rem;
+}
+
+.gradient-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(123, 97, 255, 0.15) 0%,
+    rgba(23, 21, 34, 0.3) 25%,
+    transparent 50%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% auto;
+  animation: gradient 8s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.text-shadow-glow {
+  text-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
+}
