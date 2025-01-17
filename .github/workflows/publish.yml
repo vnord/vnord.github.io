@@ -2,7 +2,7 @@ name: Publish to website
 on:
   push:
     branches:
-      - nextjs  # Changed from master to match your new branch
+      - nextjs
 
 jobs:
   Publish:
@@ -14,16 +14,19 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'  # or whatever version you're using
+          node-version: '18'
 
       - name: Install dependencies
-        run: npm ci  # or yarn install --frozen-lockfile
+        run: npm ci
 
       - name: Build static site
-        run: npm run build  # This should run `next build && next export`
+        run: npm run build
+
+      - name: Add .nojekyll file
+        run: touch ./out/.nojekyll
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out  # Next.js exports to 'out' directory by default
+          publish_dir: ./out

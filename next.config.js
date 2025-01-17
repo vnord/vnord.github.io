@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  // other config options...
+  basePath: '/vnord.github.io',
+  images: {
+    unoptimized: true,
+  },
 }
 
 module.exports = nextConfig 
