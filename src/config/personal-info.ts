@@ -25,7 +25,7 @@ export interface TimelineItem {
 export const personalInfo = {
   name: "Ari von Nordenskjöld",
   currentRole: "AI Software Engineer",
-  introduction: "Exploring interesting technologies and building cool stuff",
+  introduction: "Exploring technology and building cool stuff",
   layout: {
     preferredDisplay: 'adaptive',
     maxWidth: '1400px',
