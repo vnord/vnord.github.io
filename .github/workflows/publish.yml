@@ -2,7 +2,7 @@ name: Publish to website
 on:
   push:
     branches:
-      - nextjs
+      - master
 
 jobs:
   Publish:
