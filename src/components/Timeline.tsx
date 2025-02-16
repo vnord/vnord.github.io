@@ -29,14 +29,14 @@ export function Timeline() {
   };
 
   return (
-    <section className="max-w-4xl mx-auto py-8 md:py-16 px-4">
+    <section className="max-w-4xl mx-auto py-4 md:py-8 px-4">
       <div className="relative">
         {/* Animated flowing timeline */}
         <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-primary to-transparent -z-10">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/50 to-transparent animate-flow" />
         </div>
         
-        <div className="space-y-12 md:space-y-24 relative pl-8">
+        <div className="space-y-4 md:space-y-8 relative pl-8">
           {personalInfo.timeline.map((item, index) => (
             <TimelineItem
               key={index}

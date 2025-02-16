@@ -24,7 +24,7 @@ export interface TimelineItem {
 
 export const personalInfo = {
   name: "Ari von Nordenskjöld",
-  currentRole: "Software Engineer",
+  currentRole: "AI Software Engineer",
   introduction: "Exploring interesting technologies and building cool stuff",
   layout: {
     preferredDisplay: 'adaptive',
@@ -43,10 +43,10 @@ export const personalInfo = {
   },
   timeline: [
     {
-      period: "02/2021 - Present",
+      period: "12/2023 - Present",
       title: "Noumena Digital",
-      role: "Software Engineer",
-      description: "Working on a wide range of projects, from generative AI to language development and system architecture.",
+      role: "AI Tech Lead",
+      description: "Leading the company's generative AI initiatives, focusing on advanced AI solutions and technical leadership.",
       isCurrentRole: true,
       link: "https://noumenadigital.com",
       layout: {
@@ -56,14 +56,28 @@ export const personalInfo = {
       },
       highlights: [
         {
-          title: "AI Lead",
-          description: "Responsible for the company's generative AI initiatives, including model training, orchestration, evaluation, integration, and deployment.",
-          tags: ["LLMs", "Fine-tuning", "Prompt Engineering", "RAG"]
-        },
+          title: "AI Leadership",
+          description: "Responsible for generative AI initiatives, including model training, orchestration, evaluation, integration, and deployment.",
+          tags: ["Generative AI", "Large Language Models", "LLM Fine-tuning", "Prompt Engineering", "LangChain", "Amazon Bedrock", "Azure AI", "Agentic AI"]
+        }
+      ]
+    },
+    {
+      period: "02/2021 - Present",
+      title: "Noumena Digital",
+      role: "Software Engineer",
+      description: "Core member of the Platform team, developing the Noumena Protocol Language (NPL) and its ecosystem.",
+      link: "https://noumenadigital.com",
+      layout: {
+        highlightsDisplay: 'grid',
+        gridColumns: 2,
+        expandOnHover: true
+      },
+      highlights: [
         {
           title: "Language Development",
-          description: "Introduced new language features, from design to implementation and tooling support.",
-          tags: ["Language Design", "Compiler Development", "Technical Writing", "Developer Tools"]
+          description: "Developed the Noumena Protocol Language (NPL), including compiler, applications, APIs, plugins, tooling, and documentation systems.",
+          tags: ["Kotlin", "Software Design", "Compilers", "Jetbrains Plugin Development", "Language Server", "LSP", "Language Development", "Object-Oriented Programming"]
         },
         {
           title: "System Architecture",

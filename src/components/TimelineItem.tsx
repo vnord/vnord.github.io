@@ -38,15 +38,18 @@ export function TimelineItem({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className={`
-        flex-1 p-6 rounded-lg transition-all duration-300
-        ${isHovered ? 'timeline-hover' : 'hover:bg-primary/5'}
-      `}>
-        <div className="mb-2 font-mono text-sm text-muted">{period}</div>
+      <div 
+        className={`
+          flex-1 p-6 rounded-lg transition-all duration-300 cursor-pointer
+          ${isHovered ? 'timeline-hover' : 'hover:bg-primary/5'}
+        `}
+        onClick={highlights ? toggleExpand : undefined}
+      >
+        <div className="mb-2 font-mono text-base text-muted">{period}</div>
         <div className="flex items-start justify-between gap-4">
           <div>
             <h3 className={`
-              text-xl font-bold mb-2 transition-all duration-300
+              text-2xl font-bold mb-2 transition-all duration-300
               ${isHovered ? 'text-glow' : ''}
             `}>
               {link ? (
@@ -55,6 +58,7 @@ export function TimelineItem({
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-primary transition-colors duration-300 inline-flex items-center gap-1 group"
+                  onClick={(e) => e.stopPropagation()}
                 >
                   {title}
                   <svg 
@@ -74,22 +78,19 @@ export function TimelineItem({
               ) : title}
             </h3>
             <h4 className={`
-              text-base font-normal mb-3 transition-all duration-300
+              text-lg font-normal mb-3 transition-all duration-300
               ${isHovered ? 'text-primary' : 'text-secondary'}
             `}>
               {role}
             </h4>
-            <p className="text-base leading-relaxed text-muted mb-3">{description}</p>
+            <p className="text-lg leading-relaxed text-muted mb-3">{description}</p>
           </div>
           {highlights && (
-            <button 
-              onClick={toggleExpand}
+            <div 
               className={`
                 p-2 rounded-full transition-all duration-300 self-start flex-shrink-0
-                hover:scale-105 active:scale-95
-                ${isHovered ? 'bg-primary/20' : 'hover:bg-primary/10'}
+                ${isHovered ? 'bg-primary/20' : ''}
               `}
-              aria-label={isExpanded ? "Collapse details" : "Expand details"}
             >
               <svg 
                 className={`w-6 h-6 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} 
@@ -104,7 +105,7 @@ export function TimelineItem({
                   d="M19 9l-7 7-7-7"
                 />
               </svg>
-            </button>
+            </div>
           )}
         </div>
         {isExpanded && highlights && (
