@@ -40,16 +40,16 @@ export function TimelineItem({
     >
       <div 
         className={`
-          flex-1 p-6 rounded-lg transition-all duration-300 cursor-pointer
+          flex-1 p-4 sm:p-6 rounded-lg transition-all duration-300 cursor-pointer
           ${isHovered ? 'timeline-hover' : 'hover:bg-primary/5'}
         `}
         onClick={highlights ? toggleExpand : undefined}
       >
-        <div className="mb-2 font-mono text-base text-muted">{period}</div>
+        <div className="mb-2 font-mono text-sm sm:text-base text-muted">{period}</div>
         <div className="flex items-start justify-between gap-4">
           <div>
             <h3 className={`
-              text-2xl font-bold mb-2 transition-all duration-300
+              text-xl sm:text-2xl font-bold mb-2 transition-all duration-300
               ${isHovered ? 'text-glow' : ''}
             `}>
               {link ? (
@@ -78,12 +78,12 @@ export function TimelineItem({
               ) : title}
             </h3>
             <h4 className={`
-              text-lg font-normal mb-3 transition-all duration-300
+              text-base sm:text-lg font-normal mb-3 transition-all duration-300
               ${isHovered ? 'text-primary' : 'text-secondary'}
             `}>
               {role}
             </h4>
-            <p className="text-lg leading-relaxed text-muted mb-3">{description}</p>
+            <p className="text-base sm:text-lg leading-relaxed text-muted mb-3">{description}</p>
           </div>
           {highlights && (
             <div 
@@ -93,7 +93,7 @@ export function TimelineItem({
               `}
             >
               <svg 
-                className={`w-6 h-6 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} 
+                className={`w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} 
                 fill="none" 
                 stroke="currentColor" 
                 viewBox="0 0 24 24"
