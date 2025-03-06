@@ -43,7 +43,7 @@ export const personalInfo = {
   },
   timeline: [
     {
-      period: "12/2023 - Present",
+      period: "12/2024 - Present",
       title: "Noumena Digital",
       role: "AI Tech Lead",
       description: "Leading the company's generative AI initiatives, focusing on advanced AI solutions and technical leadership.",
