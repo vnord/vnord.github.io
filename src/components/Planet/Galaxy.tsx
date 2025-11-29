@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useMemo, useState } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame, useThree, ThreeEvent } from "@react-three/fiber";
 import * as THREE from "three";
 
 interface PlanetData {
@@ -196,7 +196,7 @@ function BasePlanet({ data, onClick, onHover, isActive, children }: PlanetProps 
 
   });
 
-  const handlePointerEnter = (e: THREE.Event) => {
+  const handlePointerEnter = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
     if (isActive) return;
     setHovered(true);
@@ -207,14 +207,14 @@ function BasePlanet({ data, onClick, onHover, isActive, children }: PlanetProps 
     }
   };
 
-  const handlePointerLeave = (e: THREE.Event) => {
+  const handlePointerLeave = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
     setHovered(false);
     document.body.style.cursor = "auto";
     onHover(null, null);
   };
 
-  const handleClick = (e: THREE.Event) => {
+  const handleClick = (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
     setHovered(false);
     document.body.style.cursor = "auto";
