@@ -1,7 +1,53 @@
-export const reading = {
-  title: "Reading Recommendations",
-  icon: "📚",
-  content: (
+"use client";
+
+import { useState } from "react";
+
+function StrangerReview() {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-[var(--primary)]/30 transition-colors">
+      <div className="mb-2">
+        <h3 className="text-base font-semibold italic text-[var(--foreground)]">The Stranger</h3>
+        <p className="text-xs text-[var(--muted)]">Albert Camus</p>
+      </div>
+      <button
+        onClick={() => setExpanded(!expanded)}
+        className="mt-2 text-xs text-[var(--primary)] hover:text-[var(--primary)]/80 transition-colors flex items-center gap-1"
+      >
+        <span>{expanded ? "Hide" : "Read"} my thoughts</span>
+        <svg 
+          className={`w-3 h-3 transition-transform ${expanded ? "rotate-180" : ""}`} 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {expanded && (
+        <div className="mt-3 pt-3 border-t border-white/10 space-y-3 text-sm text-[var(--muted)]">
+          <p>
+            Where many seemed to find in Mersault a misunderstood atheist anti-hero or something of the sort, and a critical message about social norms and the like, my lasting impression was that of the contemporary archetype, immersed in a sweltering passive nihilism – partly hedonistic, but chiefly apathetic. After the loss of sedentary values, after the <em>Entzauberung</em> of our perceived reality, there is nothing. Only absurdity. Actions, and even ideas and thoughts become meaningless and indifferent at best.
+          </p>
+          <p>
+            Mersault comes to this very realisation at the end of the book. This to me is the most interesting part – before the last section, his thoughts and actions had been exclusively deterministic. This is still the case at the end of the book, but in the incredibly beautiful final section, he becomes self-aware, he gains the ability to reflect on his own nihilism, thus transforming it from a passive and apathetic nihilism into an active nihilism. Just as the universe is indifferent to Mersault, Mersault who was previously only indifferent towards society and temporality, now also becomes indifferent to the entire cosmos and his own being. He embraces his own annihilation, even if it may only be conceptual.
+          </p>
+          <p>
+            I&apos;d be very careful to not, like some, ascribe the values of Mersault or even the inversion of his values, to Camus himself. While <em>L&apos;étranger</em> is clearly a parable, it seems to me that any moralistic interpretation, whether relativistic or even anti-moralistic, is a grave error. Camus, I think, wants us to reflect on the meaning of our own existence without judgement.
+          </p>
+          <p>
+            The lack of finality in the ending is not, I think, like some readers have suggested, an invitation to the reader to decide for himself what Mersault&apos;s fate is. No, to me it is a clear invitation as any to completely refrain from this, to not judge either Mersault, his action, those surrounding him, the universe itself, or ourselves, at all. We are invited to partake in his active nihilism, and to judge only our own reflectiveness or lack thereof. To not find or discard hope, but to transcend it. To act and think (thought itself being a form of action) without desire, to become an active agent of a chaotically deterministic universe.
+          </p>
+          <p className="text-xs opacity-70 italic">Written August 2015</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ReadingContent() {
+  return (
     <div className="space-y-3">
       <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-[var(--primary)]/30 transition-colors">
         <div className="mb-2">
@@ -139,15 +185,7 @@ export const reading = {
         </p>
       </div>
 
-      <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-[var(--primary)]/30 transition-colors">
-        <div className="mb-2">
-          <h3 className="text-base font-semibold italic text-[var(--foreground)]">The Stranger</h3>
-          <p className="text-xs text-[var(--muted)]">Albert Camus</p>
-        </div>
-        <p className="text-sm text-[var(--muted)]">
-          I wrote a review of this at some point, which I&apos;ll try to integrate or link whenever I get around to it.
-        </p>
-      </div>
+      <StrangerReview />
 
       <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-[var(--primary)]/30 transition-colors">
         <div className="mb-2">
@@ -208,6 +246,11 @@ export const reading = {
         </p>
       </div>
     </div>
-  ),
-};
+  );
+}
 
+export const reading = {
+  title: "Reading Recommendations",
+  icon: "📚",
+  content: <ReadingContent />,
+};
