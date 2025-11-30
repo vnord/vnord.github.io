@@ -50,6 +50,12 @@ const planetInfo: Record<string, PlanetInfo> = {
     icon: "🤝",
     color: "#34d399",
   },
+  reading: {
+    id: "reading",
+    name: "Reading",
+    icon: "📚",
+    color: "#a78bfa",
+  },
 };
 
 interface PlanetTooltipProps {

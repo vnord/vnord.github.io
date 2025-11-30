@@ -495,6 +495,42 @@ function ContactPlanet(props: PlanetProps) {
   );
 }
 
+function ReadingPlanet(props: PlanetProps) {
+  const { data } = props;
+  const bookRef = useRef<THREE.Group>(null);
+  
+  useFrame(({ clock }) => {
+    if (bookRef.current) {
+      bookRef.current.rotation.y = Math.sin(clock.getElapsedTime() * 0.3) * 0.15;
+    }
+  });
+
+  return (
+    <BasePlanet {...props}>
+      <group ref={bookRef} rotation={[0, 0, Math.PI / 6]}>
+        <mesh position={[-data.size * 0.25, 0, 0]} rotation={[0, -Math.PI / 6, 0]}>
+          <boxGeometry args={[data.size * 0.5, data.size * 0.7, data.size * 0.15]} />
+          <meshStandardMaterial color="#8b5cf6" />
+        </mesh>
+        <mesh position={[data.size * 0.25, 0, 0]} rotation={[0, Math.PI / 6, 0]}>
+          <boxGeometry args={[data.size * 0.5, data.size * 0.7, data.size * 0.15]} />
+          <meshStandardMaterial color="#8b5cf6" />
+        </mesh>
+        <mesh position={[0, 0, -data.size * 0.08]}>
+          <boxGeometry args={[data.size * 0.1, data.size * 0.7, data.size * 0.15]} />
+          <meshStandardMaterial color="#6d28d9" />
+        </mesh>
+        {[0, 1, 2, 3, 4].map((i) => (
+          <mesh key={i} position={[0, -data.size * 0.25 + i * data.size * 0.125, data.size * 0.01]}>
+            <planeGeometry args={[data.size * 0.45, data.size * 0.1]} />
+            <meshStandardMaterial color="#c4b5fd" />
+          </mesh>
+        ))}
+      </group>
+    </BasePlanet>
+  );
+}
+
 function OrbitPath({ radius, color }: { radius: number; color: string }) {
   return (
     <mesh rotation={[-Math.PI / 2, 0, 0]}>
@@ -585,6 +621,17 @@ export function Galaxy({ onPlanetClick, onPlanetHover, activePlanet }: GalaxyPro
       glowColor: "#22d3ee",
       emissiveIntensity: 0.5,
     },
+    {
+      id: "reading",
+      name: "Reading",
+      orbitRadius: 17,
+      orbitSpeed: 0.04,
+      orbitOffset: Math.PI * 0.2,
+      size: 0.8,
+      color: "#8b5cf6",
+      glowColor: "#a78bfa",
+      emissiveIntensity: 0.4,
+    },
   ];
 
   useFrame(({ clock }) => {
@@ -627,6 +674,8 @@ export function Galaxy({ onPlanetClick, onPlanetHover, activePlanet }: GalaxyPro
             return <PersonalPlanet key={planet.id} {...commonProps} />;
           case "contact":
             return <ContactPlanet key={planet.id} {...commonProps} />;
+          case "reading":
+            return <ReadingPlanet key={planet.id} {...commonProps} />;
           default:
             return null;
         }
