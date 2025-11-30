@@ -78,14 +78,93 @@ const sectionContent: Record<
 
         <div className="timeline-item">
           <div className="timeline-dot" />
-          <div className="timeline-date">Earlier</div>
-          <div className="timeline-title">Various Roles</div>
-          <div className="timeline-role">Volvo Cars, RISE, Intize</div>
+          <div className="timeline-date">Jan 2020 – Jun 2020</div>
+          <div className="timeline-title">Thesis Student</div>
+          <div className="timeline-role">Volvo Cars</div>
           <p className="timeline-description">
-            Software engineering internships and project management roles in
-            automotive simulation, maritime software, and education mentorship
-            programs.
+            Using the parallel functional programming language Futhark to write a
+            physically correct ray tracer for both camera and LIDAR.
           </p>
+          <div className="mt-2 flex flex-wrap">
+            <span className="tag">Futhark</span>
+            <span className="tag">Ray Tracing</span>
+            <span className="tag">GPU Computing</span>
+          </div>
+        </div>
+
+        <div className="timeline-item">
+          <div className="timeline-dot" />
+          <div className="timeline-date">Jun 2019 – Aug 2019</div>
+          <div className="timeline-title">Software Engineer (internship)</div>
+          <div className="timeline-role">Volvo Cars</div>
+          <p className="timeline-description">
+            Integrated additional hardware units for simulation with the Virtual Car
+            testing & verification framework.
+          </p>
+          <div className="mt-2 flex flex-wrap">
+            <span className="tag">Testing</span>
+            <span className="tag">Verification</span>
+            <span className="tag">Simulation</span>
+          </div>
+        </div>
+
+        <div className="timeline-item">
+          <div className="timeline-dot" />
+          <div className="timeline-date">Jun 2018 – Aug 2018</div>
+          <div className="timeline-title">Backend Developer</div>
+          <div className="timeline-role">RISE</div>
+          <p className="timeline-description">
+            Developed a configurable event notification system for the PortCDM
+            maritime information sharing platform.
+          </p>
+          <div className="mt-2 flex flex-wrap">
+            <span className="tag">Backend Development</span>
+            <span className="tag">Maritime Software</span>
+          </div>
+        </div>
+
+        <div className="timeline-item">
+          <div className="timeline-dot" />
+          <div className="timeline-date">Jun 2017 – Jun 2018</div>
+          <div className="timeline-title">Project Manager</div>
+          <div className="timeline-role">Intize</div>
+          <p className="timeline-description">
+            Organized a mentorship program for specially talented children (~5
+            mentors across ~20 kids).
+          </p>
+          <div className="mt-2 flex flex-wrap">
+            <span className="tag">Project Management</span>
+            <span className="tag">Education</span>
+          </div>
+        </div>
+
+        <div className="timeline-item">
+          <div className="timeline-dot" />
+          <div className="timeline-date">Aug 2016 – Oct 2016</div>
+          <div className="timeline-title">Student Coach</div>
+          <div className="timeline-role">Chalmers University of Technology</div>
+          <p className="timeline-description">
+            Supported and helped a student with special needs manage their studies.
+          </p>
+          <div className="mt-2 flex flex-wrap">
+            <span className="tag">Mentoring</span>
+            <span className="tag">Education</span>
+          </div>
+        </div>
+
+        <div className="timeline-item">
+          <div className="timeline-dot" />
+          <div className="timeline-date">Aug 2016 – Oct 2016</div>
+          <div className="timeline-title">Supplemental Instruction Leader</div>
+          <div className="timeline-role">Chalmers University of Technology</div>
+          <p className="timeline-description">
+            Led Supplemental Instruction sessions for Discrete Mathematics for ~30
+            students.
+          </p>
+          <div className="mt-2 flex flex-wrap">
+            <span className="tag">Mentoring</span>
+            <span className="tag">Education</span>
+          </div>
         </div>
       </div>
     ),
@@ -226,12 +305,71 @@ const sectionContent: Record<
           </div>
         </div>
 
-        <div className="mt-4 p-3 rounded-lg bg-white/5 border border-white/10">
-          <p className="text-sm font-medium mb-1">🎯 Also...</p>
-          <p className="text-sm text-[var(--muted)]">
-            Supplemental Instruction Leader for Discrete Mathematics, supporting
-            ~30 students per session.
+        <div className="timeline-item">
+          <div
+            className="timeline-dot"
+            style={{ background: "#fbbf24", boxShadow: "0 0 10px #fbbf24" }}
+          />
+          <div className="timeline-date">2014 – 2015</div>
+          <div className="timeline-title">Foundation Year</div>
+          <div className="timeline-role">Chalmers University of Technology</div>
+          <p className="timeline-description">Gothenburg, Sweden</p>
+          <div className="mt-2 flex flex-wrap">
+            <span className="tag">Mathematics</span>
+            <span className="tag">Physics</span>
+            <span className="tag">Chemistry</span>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  volunteering: {
+    title: "Volunteering",
+    icon: "🤝",
+    content: (
+      <div className="space-y-6">
+        <div className="timeline-item">
+          <div className="timeline-dot" />
+          <div className="timeline-date">Sep 2017 – Jun 2018</div>
+          <div className="timeline-title">Mentor for Specially Talented Children</div>
+          <div className="timeline-role">Intize</div>
+          <p className="timeline-description">
+            Made maths more fun and challenging for a group of three specially
+            talented kids.
           </p>
+          <div className="mt-2 flex flex-wrap">
+            <span className="tag">Education</span>
+            <span className="tag">Mentoring</span>
+          </div>
+        </div>
+
+        <div className="timeline-item">
+          <div className="timeline-dot" />
+          <div className="timeline-date">Sep 2016 – Jun 2017</div>
+          <div className="timeline-title">Mentor for High School Students</div>
+          <div className="timeline-role">Intize</div>
+          <p className="timeline-description">
+            Helped a group of five high school students with their math homework
+            for two hours every week.
+          </p>
+          <div className="mt-2 flex flex-wrap">
+            <span className="tag">Education</span>
+            <span className="tag">Mentoring</span>
+          </div>
+        </div>
+
+        <div className="timeline-item">
+          <div className="timeline-dot" />
+          <div className="timeline-date">Jun 2015 – Jul 2015</div>
+          <div className="timeline-title">Volunteer</div>
+          <div className="timeline-role">WWOOF France</div>
+          <p className="timeline-description">
+            Helped out at an organic farm.
+          </p>
+          <div className="mt-2 flex flex-wrap">
+            <span className="tag">Environment</span>
+            <span className="tag">Agriculture</span>
+          </div>
         </div>
       </div>
     ),

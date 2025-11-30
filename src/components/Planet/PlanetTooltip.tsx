@@ -44,6 +44,12 @@ const planetInfo: Record<string, PlanetInfo> = {
     icon: "✉️",
     color: "#22d3ee",
   },
+  volunteering: {
+    id: "volunteering",
+    name: "Volunteering",
+    icon: "🤝",
+    color: "#34d399",
+  },
 };
 
 interface PlanetTooltipProps {
