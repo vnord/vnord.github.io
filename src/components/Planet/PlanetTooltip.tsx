@@ -49,10 +49,11 @@ const planetInfo: Record<string, PlanetInfo> = {
 interface PlanetTooltipProps {
   hoveredPlanet: string | null;
   screenPosition: { x: number; y: number } | null;
+  isMobile?: boolean;
 }
 
-export function PlanetTooltip({ hoveredPlanet, screenPosition }: PlanetTooltipProps) {
-  if (!hoveredPlanet || !screenPosition || !planetInfo[hoveredPlanet]) {
+export function PlanetTooltip({ hoveredPlanet, screenPosition, isMobile = false }: PlanetTooltipProps) {
+  if (isMobile || !hoveredPlanet || !screenPosition || !planetInfo[hoveredPlanet]) {
     return null;
   }
 

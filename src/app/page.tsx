@@ -33,7 +33,7 @@ function LoadingScreen() {
   );
 }
 
-function IntroOverlay({ onDismiss }: { onDismiss: () => void }) {
+function IntroOverlay({ onDismiss, isMobile }: { onDismiss: () => void; isMobile: boolean }) {
   const [fadeOut, setFadeOut] = useState(false);
 
   const handleDismiss = () => {
@@ -69,7 +69,7 @@ function IntroOverlay({ onDismiss }: { onDismiss: () => void }) {
         </p>
         
         <div className="intro-cta">
-          <span>Tap or click anywhere to begin</span>
+          <span>{isMobile ? "Tap anywhere to begin" : "Click anywhere to begin"}</span>
         </div>
       </div>
     </div>
@@ -93,9 +93,14 @@ export default function Home() {
   const [hoverPosition, setHoverPosition] = useState<{ x: number; y: number } | null>(null);
   const [showIntro, setShowIntro] = useState(true);
   const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   useEffect(() => {
@@ -147,16 +152,16 @@ export default function Home() {
         activeHotspot={activeHotspot}
       />
 
-      {showIntro && <IntroOverlay onDismiss={handleDismissIntro} />}
+      {showIntro && <IntroOverlay onDismiss={handleDismissIntro} isMobile={isMobile} />}
 
       <div className="ui-overlay">
         <Header />
 
         {!showIntro && !activeHotspot && (
           <div className="controls-hint">
-            <span>Drag or pan to orbit</span>
+            <span>{isMobile ? "Pan to orbit" : "Drag to orbit"}</span>
             <span className="hint-dot">•</span>
-            <span>Pinch or scroll to zoom</span>
+            <span>{isMobile ? "Pinch to zoom" : "Scroll to zoom"}</span>
           </div>
         )}
 
@@ -164,6 +169,7 @@ export default function Home() {
           <PlanetTooltip
             hoveredPlanet={hoveredPlanet}
             screenPosition={hoverPosition}
+            isMobile={isMobile}
           />
         )}
 

@@ -49,7 +49,7 @@ const sectionContent: Record<
           <p className="timeline-description">
             Progressed from Junior to Software Engineer. Developed compiler and
             runtime components, designed new language features, and led
-            development of the Language Server + VS Code extension and the NPL
+            development of the Language Server + VS Code extension, and the NPL
             CLI. Overhauled documentation systems.
           </p>
           <div className="mt-2 flex flex-wrap">
