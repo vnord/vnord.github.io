@@ -324,27 +324,32 @@ const sectionContent: Record<
     icon: "🏠",
     content: (
       <div className="space-y-6">
-        <p className="text-[var(--muted)]">
-          Senior software engineer based in Zürich, Switzerland. I enjoy
-          building developer tools, digging into language internals, and lately
-          – figuring out how to make AI actually useful.
-        </p>
+        <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+          <h3 className="font-semibold mb-3">🌍 Based in Zürich</h3>
+          <div className="flex flex-wrap gap-2">
+            <span className="tag">Swedish citizen</span>
+            <span className="tag">Swiss B Permit</span>
+          </div>
+        </div>
 
         <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-          <h3 className="font-semibold mb-3">🏠 Personal Life</h3>
-          <p className="text-sm text-[var(--muted)]">
-            Married with two kids. When I&apos;m not writing code, I&apos;m
-            usually reading, running, or trying to convince my children that
-            bedtime is a good thing.
-          </p>
+          <h3 className="font-semibold mb-3">👨‍👩‍👧‍👧 Family</h3>
+          <div className="flex flex-wrap gap-2">
+            <span className="tag">Married</span>
+            <span className="tag">Two daughters</span>
+          </div>
         </div>
 
         <div className="p-4 rounded-xl bg-white/5 border border-white/10">
           <h3 className="font-semibold mb-3">📚 Interests</h3>
           <div className="flex flex-wrap gap-2">
+            <span className="tag">Specialty Coffee</span>
             <span className="tag">Literature</span>
-            <span className="tag tag">Running</span>
-            <span className="tag tag">Languages</span>
+            <span className="tag">Films</span>
+            <span className="tag">Running</span>
+            <span className="tag">Hiking</span>
+            <span className="tag">Languages</span>
+            <span className="tag">Video Games</span>
           </div>
         </div>
 
