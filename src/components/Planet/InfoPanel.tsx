@@ -29,7 +29,7 @@ const sectionContent: Record<
           </div>
           <div className="timeline-role">Noumena Digital AG</div>
           <p className="timeline-description">
-            Leading Noumena Tech – the language, runtime, cloud platform, and
+            Tech Lead for Noumena&apos;s language, runtime, cloud platform, and
             developer tooling. Setting technical direction and overseeing
             product delivery. Also serving as AI Tech Lead, defining company AI
             strategy and integrating generative AI with products.
@@ -316,51 +316,6 @@ const sectionContent: Record<
           </div>
         </div>
 
-        <div className="project-card">
-          <div className="project-header">
-            <h3 className="project-title">AI Integration</h3>
-          </div>
-          <p className="project-description">
-            Leading Noumena&apos;s AI initiatives – integrating generative AI
-            capabilities with our language, including model orchestration,
-            prompt engineering, and developer-facing AI features.
-          </p>
-          <div className="flex flex-wrap">
-            <span className="tag">Generative AI</span>
-            <span className="tag tag">LangChain</span>
-            <span className="tag tag">Prompt Engineering</span>
-            <span className="tag tag">Azure AI</span>
-          </div>
-        </div>
-
-        <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-[var(--primary)]/50 transition-all">
-          <h3 className="font-semibold mb-2">IoT Video Cluster</h3>
-          <p className="text-sm text-[var(--muted)] mb-3">
-            Designed a system for synchronized video playback across Raspberry
-            Pi Zero devices, controlled via MQTT over WiFi. Built a companion
-            Android app for management.
-          </p>
-          <div className="flex flex-wrap">
-            <span className="tag">Go</span>
-            <span className="tag">MQTT</span>
-            <span className="tag tag">IoT</span>
-            <span className="tag tag">Android</span>
-          </div>
-        </div>
-
-        <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-[var(--primary)]/50 transition-all">
-          <h3 className="font-semibold mb-2">Parallel Ray Tracer</h3>
-          <p className="text-sm text-[var(--muted)] mb-3">
-            Master&apos;s thesis project implementing a ray tracing system for
-            automotive sensor simulation using Futhark, a functional language
-            for GPU programming.
-          </p>
-          <div className="flex flex-wrap">
-            <span className="tag">Futhark</span>
-            <span className="tag tag">GPU Computing</span>
-            <span className="tag tag">Simulation</span>
-          </div>
-        </div>
       </div>
     ),
   },
@@ -450,8 +405,7 @@ const sectionContent: Record<
     content: (
       <div className="space-y-6">
         <p className="text-[var(--muted)]">
-          Want to chat about programming languages, AI, or just say hi? Feel
-          free to reach out!
+          Feel free to reach out if you&apos;d like to connect.
         </p>
 
         <div className="space-y-3">
