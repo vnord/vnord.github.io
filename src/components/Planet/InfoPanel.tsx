@@ -452,28 +452,6 @@ const sectionContent: Record<
             </svg>
             LinkedIn
           </a>
-
-          <a
-            href="https://vnord.net"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="contact-link w-full justify-center"
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
-              />
-            </svg>
-            vnord.net
-          </a>
         </div>
 
         <div className="mt-6 p-4 rounded-xl bg-white/5 border border-white/10 text-center">
