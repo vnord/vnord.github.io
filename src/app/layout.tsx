@@ -17,9 +17,9 @@ const mulish = Mulish({
 });
 
 export const metadata: Metadata = {
-  title: "Ari von Nordenskjöld | Software Engineer Galaxy",
+  title: "Ari von Nordenskjöld",
   description:
-    "Senior Software Engineer based in Zürich. Building developer tools, compilers, and exploring the edges of AI. Explore my interactive galaxy portfolio.",
+    "Exploring technology and building cool stuff. Based in Zürich. Building developer tools, compilers, and exploring the edges of AI. Explore my interactive galaxy portfolio.",
   keywords: [
     "software engineer",
     "developer",
@@ -32,19 +32,19 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Ari von Nordenskjöld" }],
   openGraph: {
-    title: "Ari von Nordenskjöld | Software Engineer Galaxy",
+    title: "Ari von Nordenskjöld",
     description:
-      "Senior Software Engineer based in Zürich. Building developer tools, compilers, and exploring the edges of AI. Journey through my galaxy portfolio.",
+      "Exploring technology and building cool stuff. Based in Zürich. Building developer tools, compilers, and exploring the edges of AI. Journey through my galaxy portfolio.",
     url: "https://vnord.net",
-    siteName: "vnord.net Galaxy",
+    siteName: "vnord.net",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ari von Nordenskjöld | Senior Software Engineer",
+    title: "Ari von Nordenskjöld",
     description:
-      "Senior Software Engineer based in Zürich. Building developer tools, compilers, and exploring the edges of AI.",
+      "Exploring technology and building cool stuff. Based in Zürich. Building developer tools, compilers, and exploring the edges of AI.",
   },
   icons: {
     icon: [{ url: "/favicon.png", type: "image/png", sizes: "256x256" }],

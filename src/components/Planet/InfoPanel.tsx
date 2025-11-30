@@ -547,10 +547,6 @@ const sectionContent: Record<
     icon: "✉️",
     content: (
       <div className="space-y-6">
-        <p className="text-[var(--muted)]">
-          Feel free to reach out if you&apos;d like to connect.
-        </p>
-
         <div className="space-y-3">
           <a
             href="mailto:ari@vnord.net"

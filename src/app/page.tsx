@@ -56,7 +56,7 @@ function IntroOverlay({ onDismiss, isMobile }: { onDismiss: () => void; isMobile
         
         <div className="intro-role">
           <span className="role-line" />
-          <span className="role-text">Senior Software Engineer</span>
+          <span className="role-text">Exploring technology and building cool stuff</span>
           <span className="role-line" />
         </div>
         
