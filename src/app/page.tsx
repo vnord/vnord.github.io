@@ -104,6 +104,28 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      setActiveHotspot(hash);
+      setHoveredPlanet(null);
+      setHoverPosition(null);
+      setShowIntro(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1);
+      setActiveHotspot(hash || null);
+      setHoveredPlanet(null);
+      setHoverPosition(null);
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  useEffect(() => {
     if (activeHotspot) {
       setHoveredPlanet(null);
       setHoverPosition(null);
@@ -120,6 +142,7 @@ export default function Home() {
     setActiveHotspot(id);
     setHoveredPlanet(null);
     setHoverPosition(null);
+    window.history.pushState(null, '', `#${id}`);
   }, []);
 
   const handleHotspotHover = useCallback((id: string | null, screenPos: { x: number; y: number } | null) => {
@@ -134,6 +157,7 @@ export default function Home() {
 
   const handleClosePanel = useCallback(() => {
     setActiveHotspot(null);
+    window.history.pushState(null, '', window.location.pathname);
   }, []);
 
   const handleDismissIntro = useCallback(() => {
