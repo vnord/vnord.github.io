@@ -7,7 +7,7 @@ export const personal = {
         <h3 className="font-semibold mb-3">🌍 Based in Zürich</h3>
         <div className="flex flex-wrap gap-2">
           <span className="tag">Swedish citizen</span>
-          <span className="tag">Swiss B Permit</span>
+          <span className="tag">Swiss C Permit</span>
         </div>
       </div>
 
