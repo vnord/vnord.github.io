@@ -5,39 +5,66 @@ export const experience = {
     <div className="space-y-6">
       <div className="timeline-item">
         <div className="timeline-dot" />
-        <div className="timeline-date">Aug 2025 – Present</div>
+        <div className="timeline-date">Mar 2026 – Present</div>
         <div className="timeline-title">
-          Tech Lead / Senior Software Engineer
+          Senior AI Developer (AI and Development SME)
         </div>
-        <div className="timeline-role">Noumena Digital AG</div>
+        <div className="timeline-role">Rebell AG</div>
         <p className="timeline-description">
-          Tech Lead for Noumena&apos;s language, runtime, cloud platform, and
-          developer tooling. Setting technical direction and overseeing
-          product delivery. Also serving as AI Tech Lead, defining company AI
-          strategy and integrating generative AI with products.
+          Designing and building an AI search integration, including
+          infrastructure on AWS. Building a system that automates knowledge
+          base creation from team tickets.
         </p>
         <div className="mt-2 flex flex-wrap">
-          <span className="tag">Tech Leadership</span>
-          <span className="tag">Language Design</span>
-          <span className="tag tag">Generative AI</span>
+          <span className="tag">Generative AI</span>
+          <span className="tag">AWS</span>
+          <span className="tag">Knowledge Base Automation</span>
         </div>
       </div>
 
       <div className="timeline-item">
         <div className="timeline-dot" />
-        <div className="timeline-date">Feb 2021 – Present</div>
-        <div className="timeline-title">Software Engineer</div>
-        <div className="timeline-role">Noumena Digital AG</div>
+        <div className="timeline-date">Jan 2026 – Mar 2026</div>
+        <div className="timeline-title">
+          Senior Software Engineer
+        </div>
+        <div className="timeline-role">BLP Digital</div>
         <p className="timeline-description">
-          Progressed from Junior to Software Engineer. Developed compiler and
-          runtime components, designed new language features, and led
-          development of the Language Server + VS Code extension, and the NPL
-          CLI. Overhauled documentation systems.
+          Part of the infrastructure and AI team. Enabled end-to-end provisioning
+          of new cloud environments; deployed a shared dev environment. Built a
+          local development environment for the core product that reduced setup
+          and debugging cycle time from months to under an hour.
         </p>
         <div className="mt-2 flex flex-wrap">
-          <span className="tag">Kotlin</span>
-          <span className="tag">Compilers</span>
-          <span className="tag tag">LSP</span>
+          <span className="tag">Terraform</span>
+          <span className="tag">Kubernetes</span>
+          <span className="tag">GCP</span>
+        </div>
+      </div>
+
+      <div className="timeline-item">
+        <div className="timeline-dot" />
+        <div className="timeline-date">Feb 2021 – Dec 2025</div>
+        <div className="timeline-title">
+          Tech Lead / Senior Software Engineer
+        </div>
+        <div className="timeline-role">Noumena Digital AG</div>
+        <p className="timeline-description">
+          Appointed Head of AI (Dec 2024) and Tech Lead (Aug 2025) for
+          Language &amp; Runtime, Cloud, and developer tooling. Promoted from
+          Junior to Senior.
+        </p>
+        <ul className="timeline-description list-disc list-inside mt-2 space-y-1">
+          <li>Led development of GenAI product strategy</li>
+          <li>Used Azure AI and Bedrock to fine-tune and deploy LLMs; built data pipelines</li>
+          <li>Developed agentic PoC using LangChain for an insurance use case</li>
+          <li>Developed language server, VS Code extension, and system prompt integration for AI-assisted coding tools</li>
+          <li>Designed and developed the NPL CLI, including MCP integration</li>
+        </ul>
+        <div className="mt-2 flex flex-wrap">
+          <span className="tag">Tech Leadership</span>
+          <span className="tag">Generative AI</span>
+          <span className="tag">Developer Tooling</span>
         </div>
       </div>
 
@@ -47,9 +74,9 @@ export const experience = {
         <div className="timeline-title">Software Lead (part-time)</div>
         <div className="timeline-role">CABANNER</div>
         <p className="timeline-description">
-          Designed and developed a system for synchronous video playback and
-          control of a Raspberry Pi Zero cluster over WiFi with MQTT. Built an
-          Android app for cluster control.
+          Designed system for synchronous video playback over WiFi with MQTT on
+          a Raspberry Pi Zero cluster. Developed an Android app for controlling
+          the cluster.
         </p>
         <div className="mt-2 flex flex-wrap">
           <span className="tag">Go</span>

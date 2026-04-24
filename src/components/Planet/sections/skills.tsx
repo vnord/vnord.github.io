@@ -9,10 +9,14 @@ export const skills = {
           <h3>Core Expertise</h3>
         </div>
         <div className="skills-pills">
+          <span className="skill-pill skill-pill">Generative AI</span>
           <span className="skill-pill skill-pill">Language Design</span>
           <span className="skill-pill skill-pill">Compilers</span>
           <span className="skill-pill skill-pill">Language Servers</span>
           <span className="skill-pill skill-pill">Dev Tools</span>
+          <span className="skill-pill skill-pill">Infrastructure</span>
+          <span className="skill-pill skill-pill">Technical Architecture</span>
+          <span className="skill-pill skill-pill">Technical Writing</span>
         </div>
       </div>
 
@@ -26,7 +30,7 @@ export const skills = {
             <span className="skill-pill">Kotlin</span>
             <span className="skill-pill">Python</span>
             <span className="skill-pill">Go</span>
-            <span className="skill-pill">Bash</span>
+            <span className="skill-pill">TypeScript</span>
             <span className="skill-pill">Haskell</span>
           </div>
         </div>
@@ -42,7 +46,7 @@ export const skills = {
             <span className="skill-pill">LangChain</span>
             <span className="skill-pill">Ollama</span>
             <span className="skill-pill">Prompt Engineering</span>
-            <span className="skill-pill skill-pill">LLM fine-tuning</span>
+            <span className="skill-pill skill-pill">LLM Fine-tuning</span>
             <span className="skill-pill">MCP</span>
           </div>
         </div>
@@ -55,11 +59,17 @@ export const skills = {
         </div>
         <div className="skills-pills">
           <span className="skill-pill">Docker</span>
+          <span className="skill-pill">Kubernetes</span>
+          <span className="skill-pill">AWS</span>
+          <span className="skill-pill">GCP</span>
           <span className="skill-pill">Linux</span>
+          <span className="skill-pill">Shell</span>
           <span className="skill-pill">CI/CD</span>
           <span className="skill-pill">Git</span>
           <span className="skill-pill skill-pill">Terraform</span>
-          <span className="skill-pill skill-pill">Burp Suite</span>
+          <span className="skill-pill skill-pill">CDK</span>
+          <span className="skill-pill">Bash</span>
+          <span className="skill-pill">Burp Suite</span>
         </div>
       </div>
     </div>
