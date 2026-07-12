@@ -4,6 +4,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Trailing slashes for GitHub Pages directory routes
+  trailingSlash: true,
 }
 
 module.exports = nextConfig 
