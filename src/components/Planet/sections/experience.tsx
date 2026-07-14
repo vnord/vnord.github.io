@@ -11,14 +11,25 @@ export const experience = {
         </div>
         <div className="timeline-role">Rebell AG</div>
         <p className="timeline-description">
-          Designing and building an AI search integration, including
-          infrastructure on AWS. Building a system that automates knowledge
-          base creation from team tickets.
+          Designing and building an end-to-end AI chat assistant, including a
+          React-based H5 mini app frontend and an AWS agent backend using Amazon
+          Bedrock AgentCore and Strands Agents. Implemented the project's
+          complete CI/CD pipelines and comprehensive observability with
+          end-to-end distributed tracing, enabling precise performance analysis
+          across the entire system. Optimized the existing architecture to align
+          with the AWS Well-Architected Framework.
+        </p>
+        <p className="timeline-description mt-2">
+          Co-leading the company-wide adoption of trunk-based development and
+          Accelerate/DORA-aligned engineering practices with another senior
+          engineer.
         </p>
         <div className="mt-2 flex flex-wrap">
-          <span className="tag">Generative AI</span>
-          <span className="tag">AWS</span>
-          <span className="tag">Knowledge Base Automation</span>
+          <span className="tag">React &amp; H5 Mini App</span>
+          <span className="tag">AgentCore &amp; Strands</span>
+          <span className="tag">AWS Well-Architected</span>
+          <span className="tag">CI/CD &amp; Observability</span>
+          <span className="tag">Trunk-Based Development</span>
         </div>
       </div>
 
@@ -178,4 +189,3 @@ export const experience = {
     </div>
   ),
 };
-
