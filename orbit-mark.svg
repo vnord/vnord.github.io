@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">vnord.net orbital mark</title>
+  <desc id="desc">A warm sun crossed by three orbital paths and two satellites.</desc>
+  <defs>
+    <radialGradient id="field" cx="42%" cy="36%" r="78%">
+      <stop offset="0" stop-color="#111a31"/>
+      <stop offset="1" stop-color="#05070d"/>
+    </radialGradient>
+    <radialGradient id="sun" cx="36%" cy="32%" r="72%">
+      <stop offset="0" stop-color="#fff9dd"/>
+      <stop offset=".5" stop-color="#f4c76b"/>
+      <stop offset="1" stop-color="#d99537"/>
+    </radialGradient>
+    <filter id="soft-glow" x="-120%" y="-120%" width="340%" height="340%">
+      <feGaussianBlur stdDeviation="13"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="url(#field)"/>
+  <circle cx="256" cy="256" r="155" fill="none" stroke="#ffffff" stroke-opacity=".075" stroke-width="2"/>
+  <circle cx="256" cy="256" r="204" fill="none" stroke="#ffffff" stroke-opacity=".045" stroke-width="2"/>
+  <ellipse cx="256" cy="256" rx="192" ry="71" fill="none" stroke="#82dec0" stroke-opacity=".82" stroke-width="5" transform="rotate(-24 256 256)"/>
+  <ellipse cx="256" cy="256" rx="108" ry="199" fill="none" stroke="#aeb7ee" stroke-opacity=".42" stroke-width="3" transform="rotate(34 256 256)"/>
+  <ellipse cx="256" cy="256" rx="180" ry="137" fill="none" stroke="#f4c76b" stroke-opacity=".19" stroke-width="3" transform="rotate(19 256 256)"/>
+  <circle cx="256" cy="256" r="54" fill="#f4c76b" opacity=".18" filter="url(#soft-glow)"/>
+  <circle cx="256" cy="256" r="25" fill="url(#sun)"/>
+  <circle cx="408" cy="157" r="17" fill="#82dec0" opacity=".24" filter="url(#soft-glow)"/>
+  <circle cx="408" cy="157" r="9" fill="#82dec0" stroke="#071018" stroke-width="3"/>
+  <circle cx="125" cy="346" r="7" fill="#f08db8" stroke="#070a12" stroke-width="3"/>
+</svg>

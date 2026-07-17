@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-labelledby="title desc">
+  <title id="title">Ari von Nordenskjöld</title>
+  <desc id="desc">A golden sun and mint orbit on a midnight field.</desc>
+  <rect width="32" height="32" rx="8" fill="#070a12"/>
+  <rect x=".75" y=".75" width="30.5" height="30.5" rx="7.25" fill="none" stroke="#ffffff" stroke-opacity=".08" stroke-width="1.5"/>
+  <ellipse cx="16" cy="16" rx="11.5" ry="5.25" fill="none" stroke="#82dec0" stroke-width="1.65" transform="rotate(-24 16 16)"/>
+  <circle cx="16" cy="16" r="3.7" fill="#f4c76b"/>
+  <circle cx="25.1" cy="10.2" r="1.45" fill="#f08db8" stroke="#070a12" stroke-width="1"/>
+</svg>
