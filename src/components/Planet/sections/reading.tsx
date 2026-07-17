@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { OrbitIcon } from "../OrbitIcon";
 
 function StrangerReview() {
   const [expanded, setExpanded] = useState(false);
@@ -155,7 +156,8 @@ function ReadingContent() {
               rel="noopener noreferrer"
               className="hover:text-[var(--primary)] transition-colors"
             >
-              Unqualified Reservations ↗
+              <span>Unqualified Reservations</span>
+              <OrbitIcon name="external" size={13} className="external-link-icon" />
             </a>
           </h3>
           <p className="text-xs text-[var(--muted)]">Mencius Moldbug</p>
@@ -236,7 +238,8 @@ function ReadingContent() {
               rel="noopener noreferrer"
               className="hover:text-[var(--primary)] transition-colors"
             >
-              They Had No Deepness of Earth ↗
+              <span>They Had No Deepness of Earth</span>
+              <OrbitIcon name="external" size={13} className="external-link-icon" />
             </a>
           </h3>
           <p className="text-xs text-[var(--muted)]">Zero HP Lovecraft</p>
@@ -251,6 +254,6 @@ function ReadingContent() {
 
 export const reading = {
   title: "Reading Recommendations",
-  icon: "📚",
+  icon: <OrbitIcon name="reading" />,
   content: <ReadingContent />,
 };

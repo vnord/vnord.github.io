@@ -1,43 +1,34 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import {
   experience,
   skills,
   education,
-  volunteering,
   projects,
   personal,
   contact,
   reading,
 } from "./sections";
+import { OrbitIcon } from "./OrbitIcon";
+import { isOrbitId, ORBIT_META, type OrbitId } from "./orbitSystem";
 
 interface InfoPanelProps {
   activeSection: string | null;
   onClose: () => void;
 }
 
-const sectionContent: Record<
-  string,
-  {
-    title: string;
-    icon: string;
-    content: React.ReactNode;
-  }
-> = {
-  experience,
-  skills,
-  education,
-  volunteering,
-  projects,
-  personal,
-  contact,
-  reading,
+const sectionContent: Record<OrbitId, React.ReactNode> = {
+  experience: experience.content,
+  skills: skills.content,
+  education: education.content,
+  projects: projects.content,
+  personal: personal.content,
+  contact: contact.content,
+  reading: reading.content,
 };
 
 export function InfoPanel({ activeSection, onClose }: InfoPanelProps) {
-  const panelRef = useRef<HTMLDivElement>(null);
-
   // Close on escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -50,49 +41,32 @@ export function InfoPanel({ activeSection, onClose }: InfoPanelProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
-  // Close on click outside - only when panel is actually shown
-  useEffect(() => {
-    if (!activeSection) return;
-
-    const handleClickOutside = (e: MouseEvent) => {
-      if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
-        onClose();
-      }
-    };
-
-    // Delay adding the listener to prevent the same click that opened the panel from closing it
-    const timer = setTimeout(() => {
-      window.addEventListener("click", handleClickOutside);
-    }, 300);
-
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener("click", handleClickOutside);
-    };
-  }, [activeSection, onClose]);
-
-  if (!activeSection || !sectionContent[activeSection]) {
+  if (!activeSection || !isOrbitId(activeSection)) {
     return null;
   }
 
-  const section = sectionContent[activeSection];
+  const section = ORBIT_META[activeSection];
 
   return (
-    <div
-      className="info-panel"
-      ref={panelRef}
-      onClick={(e) => e.stopPropagation()}
-    >
-      <button className="close-button" onClick={onClose}>
-        ×
-      </button>
+    <>
+      <button className="info-panel-backdrop" onClick={onClose} aria-label="Close panel" />
+      <aside
+        className="info-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="panel-title"
+      >
+        <button className="close-button" onClick={onClose} aria-label="Close panel">
+          <OrbitIcon name="close" size={18} />
+        </button>
 
-      <div className="flex items-center gap-3 mb-6">
-        <span className="text-3xl">{section.icon}</span>
-        <h2 className="text-2xl font-bold text-gradient">{section.title}</h2>
-      </div>
+        <div className="panel-heading">
+          <span className="panel-icon" aria-hidden="true"><OrbitIcon name={section.icon} /></span>
+          <h2 id="panel-title">{section.name}</h2>
+        </div>
 
-      <div className="panel-content">{section.content}</div>
-    </div>
+        <div className="panel-content">{sectionContent[activeSection]}</div>
+      </aside>
+    </>
   );
 }

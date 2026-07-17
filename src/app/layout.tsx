@@ -1,25 +1,14 @@
 import type { Metadata } from "next";
-import { Poppins, Mulish } from "next/font/google";
 import "./globals.css";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-poppins",
-  display: "swap",
-});
-
-const mulish = Mulish({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-mulish",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "Ari von Nordenskjöld",
+  metadataBase: new URL("https://vnord.net"),
+  title: {
+    default: "Ari von Nordenskjöld",
+    template: "%s · Ari von Nordenskjöld",
+  },
   description:
-    "Exploring technology and building cool stuff. Based in Zürich. Building developer tools, compilers, and exploring the edges of AI. Explore my interactive galaxy portfolio.",
+    "Software engineer in Zürich building developer tools, compilers, language systems, and applied AI—presented as an interactive planetary portfolio.",
   keywords: [
     "software engineer",
     "developer",
@@ -34,20 +23,38 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Ari von Nordenskjöld",
     description:
-      "Exploring technology and building cool stuff. Based in Zürich. Building developer tools, compilers, and exploring the edges of AI. Journey through my galaxy portfolio.",
-    url: "https://vnord.net",
+      "Developer tools, compilers, language design, and applied AI—explore the work as an interactive planetary system.",
+    url: "/",
     siteName: "vnord.net",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Ari von Nordenskjöld — software engineer in Zürich",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Ari von Nordenskjöld",
     description:
-      "Exploring technology and building cool stuff. Based in Zürich. Building developer tools, compilers, and exploring the edges of AI.",
+      "Developer tools, compilers, language design, and applied AI from Zürich.",
+    images: ["/og-image.png"],
   },
   icons: {
-    icon: [{ url: "/favicon.png", type: "image/png", sizes: "256x256" }],
+    icon: [
+      { url: "/mark.svg", type: "image/svg+xml" },
+      { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-16.png", type: "image/png", sizes: "16x16" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
   },
 };
 
@@ -62,11 +69,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#050510" />
       </head>
-      <body
-        className={`${poppins.variable} ${mulish.variable} font-sans antialiased`}
-      >
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

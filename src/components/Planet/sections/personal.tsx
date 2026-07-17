@@ -1,10 +1,12 @@
+import { OrbitIcon } from "../OrbitIcon";
+
 export const personal = {
   title: "About Me",
-  icon: "🏠",
+  icon: <OrbitIcon name="personal" />,
   content: (
     <div className="space-y-6">
       <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-        <h3 className="font-semibold mb-3">🌍 Based in Zürich</h3>
+        <h3 className="section-card-title"><OrbitIcon name="location" size={17} />Based in Zürich</h3>
         <div className="flex flex-wrap gap-2">
           <span className="tag">Swedish citizen</span>
           <span className="tag">Swiss C Permit</span>
@@ -12,7 +14,7 @@ export const personal = {
       </div>
 
       <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-        <h3 className="font-semibold mb-3">👨‍👩‍👧‍👧 Family</h3>
+        <h3 className="section-card-title"><OrbitIcon name="family" size={17} />Family</h3>
         <div className="flex flex-wrap gap-2">
           <span className="tag">Married</span>
           <span className="tag">Two daughters</span>
@@ -20,7 +22,7 @@ export const personal = {
       </div>
 
       <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-        <h3 className="font-semibold mb-3">📚 Interests</h3>
+        <h3 className="section-card-title"><OrbitIcon name="interests" size={17} />Interests</h3>
         <div className="flex flex-wrap gap-2">
           <span className="tag">Specialty Coffee</span>
           <span className="tag">Literature</span>
@@ -33,7 +35,7 @@ export const personal = {
       </div>
 
       <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-        <h3 className="font-semibold mb-3">🗣️ Languages</h3>
+        <h3 className="section-card-title"><OrbitIcon name="languages" size={17} />Languages</h3>
         <div className="space-y-2">
           <div className="flex justify-between items-center">
             <span className="text-sm">Swedish</span>
@@ -83,4 +85,3 @@ export const personal = {
     </div>
   ),
 };
-

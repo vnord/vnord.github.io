@@ -1,6 +1,8 @@
+import { OrbitIcon } from "../OrbitIcon";
+
 export const experience = {
   title: "Experience",
-  icon: "💼",
+  icon: <OrbitIcon name="experience" />,
   content: (
     <div className="space-y-6">
       <div className="timeline-item">

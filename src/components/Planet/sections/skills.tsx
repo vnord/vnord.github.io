@@ -1,11 +1,13 @@
+import { OrbitIcon } from "../OrbitIcon";
+
 export const skills = {
   title: "Skills & Tech",
-  icon: "⚙️",
+  icon: <OrbitIcon name="skills" />,
   content: (
     <div className="skills-container">
       <div className="skills-section skills-section-highlight">
         <div className="skills-section-header">
-          <span className="skills-section-icon">🎯</span>
+          <span className="skills-section-icon"><OrbitIcon name="target" size={16} /></span>
           <h3>Core Expertise</h3>
         </div>
         <div className="skills-pills">
@@ -23,7 +25,7 @@ export const skills = {
       <div className="skills-row">
         <div className="skills-section">
           <div className="skills-section-header">
-            <span className="skills-section-icon">💻</span>
+            <span className="skills-section-icon"><OrbitIcon name="code" size={16} /></span>
             <h3>Languages</h3>
           </div>
           <div className="skills-pills">
@@ -37,7 +39,7 @@ export const skills = {
 
         <div className="skills-section">
           <div className="skills-section-header">
-            <span className="skills-section-icon">🤖</span>
+            <span className="skills-section-icon"><OrbitIcon name="ai" size={16} /></span>
             <h3>GenAI</h3>
           </div>
           <div className="skills-pills">
@@ -54,7 +56,7 @@ export const skills = {
 
       <div className="skills-section">
         <div className="skills-section-header">
-          <span className="skills-section-icon">🛠️</span>
+          <span className="skills-section-icon"><OrbitIcon name="tools" size={16} /></span>
           <h3>Tools & Infrastructure</h3>
         </div>
         <div className="skills-pills">
@@ -75,4 +77,3 @@ export const skills = {
     </div>
   ),
 };
-

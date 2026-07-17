@@ -1,6 +1,8 @@
+import { OrbitIcon } from "../OrbitIcon";
+
 export const projects = {
   title: "Projects & Highlights",
-  icon: "🚀",
+  icon: <OrbitIcon name="projects" />,
   content: (
     <div className="space-y-6">
       <div className="project-card">
@@ -125,4 +127,3 @@ export const projects = {
     </div>
   ),
 };
-

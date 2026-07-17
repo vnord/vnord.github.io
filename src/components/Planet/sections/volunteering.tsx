@@ -1,6 +1,8 @@
+import { OrbitIcon } from "../OrbitIcon";
+
 export const volunteering = {
   title: "Volunteering",
-  icon: "🤝",
+  icon: <OrbitIcon name="volunteering" />,
   content: (
     <div className="space-y-6">
       <div className="timeline-item">
@@ -49,4 +51,3 @@ export const volunteering = {
     </div>
   ),
 };
-

@@ -1,13 +1,12 @@
+import { OrbitIcon } from "../OrbitIcon";
+
 export const education = {
   title: "Education",
-  icon: "🎓",
+  icon: <OrbitIcon name="education" />,
   content: (
     <div className="space-y-6">
       <div className="timeline-item">
-        <div
-          className="timeline-dot"
-          style={{ background: "#fbbf24", boxShadow: "0 0 10px #fbbf24" }}
-        />
+        <div className="timeline-dot" />
         <div className="timeline-date">2018 – 2020</div>
         <div className="timeline-title">M.Sc. Computer Science</div>
         <div className="timeline-role">Chalmers University of Technology</div>
@@ -22,7 +21,8 @@ export const education = {
                 rel="noopener noreferrer"
                 className="text-sm text-[var(--muted)] hover:text-[var(--primary)] transition-colors"
               >
-                Ray Tracing for Sensor Simulation using Parallel Functional Programming ↗
+                <span>Ray Tracing for Sensor Simulation using Parallel Functional Programming</span>
+                <OrbitIcon name="external" size={13} className="external-link-icon" />
               </a>
               <p className="text-xs text-[var(--muted)] mt-1 opacity-70">
                 Supervised by John Hughes & Mary Sheeran
@@ -38,10 +38,7 @@ export const education = {
       </div>
 
       <div className="timeline-item">
-        <div
-          className="timeline-dot"
-          style={{ background: "#fbbf24", boxShadow: "0 0 10px #fbbf24" }}
-        />
+        <div className="timeline-dot" />
         <div className="timeline-date">2015 – 2018</div>
         <div className="timeline-title">B.Sc. Computer Engineering</div>
         <div className="timeline-role">Chalmers University of Technology</div>
@@ -56,7 +53,8 @@ export const education = {
                 rel="noopener noreferrer"
                 className="text-sm text-[var(--muted)] hover:text-[var(--primary)] transition-colors"
               >
-                Port Call Synchronization – automating vessel arrival time recommendations ↗
+                <span>Port Call Synchronization – automating vessel arrival time recommendations</span>
+                <OrbitIcon name="external" size={13} className="external-link-icon" />
               </a>
             </div>
           </div>
@@ -68,10 +66,7 @@ export const education = {
       </div>
 
       <div className="timeline-item">
-        <div
-          className="timeline-dot"
-          style={{ background: "#fbbf24", boxShadow: "0 0 10px #fbbf24" }}
-        />
+        <div className="timeline-dot" />
         <div className="timeline-date">2014 – 2015</div>
         <div className="timeline-title">Foundation Year</div>
         <div className="timeline-role">Chalmers University of Technology</div>
@@ -85,4 +80,3 @@ export const education = {
     </div>
   ),
 };
-

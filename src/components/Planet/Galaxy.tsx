@@ -3,9 +3,11 @@
 import { useRef, useMemo, useState } from "react";
 import { useFrame, useThree, ThreeEvent } from "@react-three/fiber";
 import * as THREE from "three";
+import { OrbitalArtifact } from "./OrbitalArtifact";
+import { ORBIT_META, type OrbitId } from "./orbitSystem";
 
 interface PlanetData {
-  id: string;
+  id: OrbitId;
   name: string;
   orbitRadius: number;
   orbitSpeed: number;
@@ -89,19 +91,35 @@ function GalacticCore() {
   });
 
   return (
-    <points ref={ref}>
-      <bufferGeometry>
-        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.15}
-        color="#fef3c7"
-        transparent
-        opacity={0.6}
-        sizeAttenuation
-        blending={THREE.AdditiveBlending}
-      />
-    </points>
+    <group>
+      <mesh>
+        <icosahedronGeometry args={[0.72, 2]} />
+        <meshStandardMaterial
+          color="#ffe8a3"
+          emissive="#f0ae43"
+          emissiveIntensity={2.8}
+          roughness={0.82}
+          flatShading
+        />
+      </mesh>
+      <mesh>
+        <sphereGeometry args={[1.18, 32, 32]} />
+        <meshBasicMaterial color="#f4b84c" transparent opacity={0.075} depthWrite={false} />
+      </mesh>
+      <points ref={ref}>
+        <bufferGeometry>
+          <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+        </bufferGeometry>
+        <pointsMaterial
+          size={0.15}
+          color="#fef3c7"
+          transparent
+          opacity={0.55}
+          sizeAttenuation
+          blending={THREE.AdditiveBlending}
+        />
+      </points>
+    </group>
   );
 }
 
@@ -160,6 +178,8 @@ function BasePlanet({ data, onClick, onHover, isActive, children }: PlanetProps 
   const groupRef = useRef<THREE.Group>(null);
   const glowRef = useRef<THREE.Mesh>(null);
   const contentRef = useRef<THREE.Group>(null);
+  const artifactOrbitRef = useRef<THREE.Group>(null);
+  const lastTooltipUpdateRef = useRef(0);
   const [hovered, setHovered] = useState(false);
   const { camera, size } = useThree();
 
@@ -181,17 +201,32 @@ function BasePlanet({ data, onClick, onHover, isActive, children }: PlanetProps 
       const angle = t * data.orbitSpeed + data.orbitOffset;
       groupRef.current.position.x = Math.cos(angle) * data.orbitRadius;
       groupRef.current.position.z = Math.sin(angle) * data.orbitRadius;
-      groupRef.current.position.y = Math.sin(t * 0.5 + data.orbitOffset) * 0.5;
+      groupRef.current.position.y = Math.sin(t * (0.2 + data.orbitSpeed) + data.orbitOffset) * 0.28;
     }
 
     if (contentRef.current) {
-      contentRef.current.rotation.y = t * 0.3;
+      contentRef.current.rotation.x = -0.07 + Math.sin(t * 0.11 + data.orbitOffset) * 0.065;
+      contentRef.current.rotation.y = t * 0.08 + data.orbitOffset * 0.18;
+      contentRef.current.rotation.z = Math.sin(t * 0.18 + data.orbitOffset) * 0.045;
+    }
+
+    if (artifactOrbitRef.current) {
+      artifactOrbitRef.current.rotation.z = data.orbitOffset * 0.12;
+      artifactOrbitRef.current.rotation.x = Math.PI * 0.44;
     }
 
     if (glowRef.current) {
-      const pulse = 1 + Math.sin(t * 2 + data.orbitOffset) * 0.1;
-      const scale = (hovered || isActive) ? pulse * 1.4 : pulse * 1.15;
+      const pulse = 1 + Math.sin(t * 0.65 + data.orbitOffset) * 0.025;
+      const scale = (hovered || isActive) ? pulse * 1.34 : pulse * 1.08;
       glowRef.current.scale.setScalar(scale);
+    }
+
+    if (hovered && t - lastTooltipUpdateRef.current > 0.08) {
+      const screenPos = getScreenPosition();
+      if (screenPos) {
+        onHover(data.id, screenPos);
+        lastTooltipUpdateRef.current = t;
+      }
     }
 
   });
@@ -236,298 +271,39 @@ function BasePlanet({ data, onClick, onHover, isActive, children }: PlanetProps 
       </mesh>
 
       <mesh ref={glowRef} renderOrder={-1}>
-        <sphereGeometry args={[data.size * 1.2, 32, 32]} />
+        <icosahedronGeometry args={[data.size * 1.12, 2]} />
         <meshBasicMaterial
           color={data.glowColor}
           transparent
-          opacity={isHighlighted ? 0.25 : 0.12}
+          opacity={isHighlighted ? 0.07 : 0.018}
           depthWrite={false}
         />
       </mesh>
 
-      <group ref={contentRef} scale={isHighlighted ? 1.1 : 1}>
+      <group ref={artifactOrbitRef}>
+        <mesh>
+          <torusGeometry args={[data.size * 1.38, data.size * 0.009, 4, 64]} />
+          <meshBasicMaterial
+            color={data.glowColor}
+            transparent
+            opacity={isHighlighted ? 0.32 : 0.08}
+            blending={THREE.AdditiveBlending}
+            depthWrite={false}
+          />
+        </mesh>
+      </group>
+
+      <group ref={contentRef} scale={isHighlighted ? 1.46 : 1.3}>
         {children}
       </group>
 
       <pointLight
         color={data.glowColor}
-        intensity={isHighlighted ? 3 : 1}
-        distance={data.size * 10}
+        intensity={isHighlighted ? 2.2 : 0.85}
+        distance={data.size * 7}
         decay={2}
       />
     </group>
-  );
-}
-
-function ExperiencePlanet(props: PlanetProps) {
-  const { data, isActive } = props;
-  const hovered = isActive;
-  return (
-    <BasePlanet {...props}>
-      <mesh>
-        <boxGeometry args={[data.size * 1.2, data.size * 0.8, data.size * 0.5]} />
-        <meshStandardMaterial color="#92400e" roughness={0.3} metalness={0.4} />
-      </mesh>
-      <mesh position={[0, data.size * 0.45, 0]}>
-        <boxGeometry args={[data.size * 0.3, data.size * 0.1, data.size * 0.1]} />
-        <meshStandardMaterial color="#78350f" roughness={0.3} metalness={0.5} />
-      </mesh>
-      <mesh position={[0, 0, data.size * 0.26]}>
-        <boxGeometry args={[data.size * 0.25, data.size * 0.15, data.size * 0.02]} />
-        <meshStandardMaterial color="#fbbf24" emissive="#fbbf24" emissiveIntensity={0.5} />
-      </mesh>
-    </BasePlanet>
-  );
-}
-
-function SkillsPlanet(props: PlanetProps) {
-  const { data } = props;
-  const gear1Ref = useRef<THREE.Group>(null);
-  const gear2Ref = useRef<THREE.Group>(null);
-  
-  useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
-    if (gear1Ref.current) gear1Ref.current.rotation.z = t * 0.5;
-    if (gear2Ref.current) gear2Ref.current.rotation.z = -t * 0.625;
-  });
-
-  const teethCount1 = 8;
-  const teethCount2 = 10;
-
-  return (
-    <BasePlanet {...props}>
-      <group ref={gear1Ref} position={[-data.size * 0.3, 0, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <mesh>
-          <cylinderGeometry args={[data.size * 0.4, data.size * 0.4, data.size * 0.12, 32]} />
-          <meshStandardMaterial color="#4f46e5" metalness={0.8} roughness={0.2} />
-        </mesh>
-        <mesh>
-          <cylinderGeometry args={[data.size * 0.12, data.size * 0.12, data.size * 0.15, 16]} />
-          <meshStandardMaterial color="#1e1b4b" metalness={0.9} roughness={0.1} />
-        </mesh>
-        {Array.from({ length: teethCount1 }).map((_, i) => {
-          const angle = (i / teethCount1) * Math.PI * 2;
-          return (
-            <mesh key={i} position={[Math.cos(angle) * data.size * 0.45, 0, Math.sin(angle) * data.size * 0.45]} rotation={[0, -angle, 0]}>
-              <boxGeometry args={[data.size * 0.12, data.size * 0.12, data.size * 0.1]} />
-              <meshStandardMaterial color="#4f46e5" metalness={0.8} roughness={0.2} />
-            </mesh>
-          );
-        })}
-      </group>
-
-      <group ref={gear2Ref} position={[data.size * 0.35, data.size * 0.15, data.size * 0.05]} rotation={[Math.PI / 2, 0, 0]}>
-        <mesh>
-          <cylinderGeometry args={[data.size * 0.32, data.size * 0.32, data.size * 0.1, 32]} />
-          <meshStandardMaterial color="#818cf8" metalness={0.8} roughness={0.2} />
-        </mesh>
-        <mesh>
-          <cylinderGeometry args={[data.size * 0.1, data.size * 0.1, data.size * 0.12, 16]} />
-          <meshStandardMaterial color="#312e81" metalness={0.9} roughness={0.1} />
-        </mesh>
-        {Array.from({ length: teethCount2 }).map((_, i) => {
-          const angle = (i / teethCount2) * Math.PI * 2;
-          return (
-            <mesh key={i} position={[Math.cos(angle) * data.size * 0.36, 0, Math.sin(angle) * data.size * 0.36]} rotation={[0, -angle, 0]}>
-              <boxGeometry args={[data.size * 0.1, data.size * 0.1, data.size * 0.08]} />
-              <meshStandardMaterial color="#818cf8" metalness={0.8} roughness={0.2} />
-            </mesh>
-          );
-        })}
-      </group>
-
-    </BasePlanet>
-  );
-}
-
-function EducationPlanet(props: PlanetProps) {
-  const { data } = props;
-  return (
-    <BasePlanet {...props}>
-      <group position={[0, data.size * 0.3, 0]}>
-        <mesh>
-          <boxGeometry args={[data.size * 0.9, data.size * 0.06, data.size * 0.9]} />
-          <meshStandardMaterial color="#1f2937" />
-        </mesh>
-        <mesh position={[0, data.size * 0.12, 0]} rotation={[0, Math.PI / 4, 0]}>
-          <coneGeometry args={[data.size * 0.45, data.size * 0.2, 4]} />
-          <meshStandardMaterial color="#1f2937" />
-        </mesh>
-        <mesh position={[data.size * 0.45, 0, 0]}>
-          <sphereGeometry args={[data.size * 0.06, 8, 8]} />
-          <meshStandardMaterial color="#fbbf24" emissive="#fbbf24" emissiveIntensity={0.8} />
-        </mesh>
-      </group>
-      <group position={[0, -data.size * 0.2, 0]}>
-        <mesh>
-          <boxGeometry args={[data.size * 0.8, data.size * 0.12, data.size * 0.6]} />
-          <meshStandardMaterial color="#dc2626" />
-        </mesh>
-        <mesh position={[0, data.size * 0.07, 0]}>
-          <boxGeometry args={[data.size * 0.75, data.size * 0.08, data.size * 0.55]} />
-          <meshStandardMaterial color="#fef3c7" />
-        </mesh>
-      </group>
-    </BasePlanet>
-  );
-}
-
-function ProjectsPlanet(props: PlanetProps) {
-  const { data } = props;
-  const flameRef = useRef<THREE.Mesh>(null);
-  
-  useFrame(({ clock }) => {
-    if (flameRef.current) {
-      flameRef.current.scale.y = 0.8 + Math.sin(clock.getElapsedTime() * 10) * 0.2;
-    }
-  });
-
-  return (
-    <BasePlanet {...props}>
-      <mesh>
-        <cylinderGeometry args={[data.size * 0.25, data.size * 0.3, data.size * 0.9, 12]} />
-        <meshStandardMaterial color="#f5f5f4" metalness={0.3} roughness={0.4} />
-      </mesh>
-      <mesh position={[0, data.size * 0.6, 0]}>
-        <coneGeometry args={[data.size * 0.25, data.size * 0.35, 12]} />
-        <meshStandardMaterial color="#ec4899" metalness={0.4} roughness={0.3} />
-      </mesh>
-      <mesh position={[0, data.size * 0.15, 0]}>
-        <cylinderGeometry args={[data.size * 0.27, data.size * 0.27, data.size * 0.2, 12]} />
-        <meshStandardMaterial color="#ec4899" />
-      </mesh>
-      <mesh position={[0, data.size * 0.3, data.size * 0.22]}>
-        <circleGeometry args={[data.size * 0.08, 16]} />
-        <meshStandardMaterial color="#0ea5e9" emissive="#0ea5e9" emissiveIntensity={0.8} />
-      </mesh>
-      <mesh ref={flameRef} position={[0, -data.size * 0.65, 0]}>
-        <coneGeometry args={[data.size * 0.22, data.size * 0.45, 12]} />
-        <meshStandardMaterial color="#ff6600" emissive="#ff4400" emissiveIntensity={2} />
-      </mesh>
-      <mesh position={[0, -data.size * 0.55, 0]}>
-        <coneGeometry args={[data.size * 0.14, data.size * 0.3, 12]} />
-        <meshStandardMaterial color="#ffcc00" emissive="#ffaa00" emissiveIntensity={3} />
-      </mesh>
-    </BasePlanet>
-  );
-}
-
-function PersonalPlanet(props: PlanetProps) {
-  const { data } = props;
-
-  return (
-    <BasePlanet {...props}>
-      <mesh position={[0, -data.size * 0.15, 0]}>
-        <boxGeometry args={[data.size * 0.7, data.size * 0.45, data.size * 0.5]} />
-        <meshStandardMaterial color="#fef3c7" />
-      </mesh>
-      
-      <group position={[0, data.size * 0.2, 0]}>
-        <mesh rotation={[0, 0, Math.PI / 4]} position={[-data.size * 0.175, 0, 0]}>
-          <boxGeometry args={[data.size * 0.5, data.size * 0.08, data.size * 0.55]} />
-          <meshStandardMaterial color="#dc2626" />
-        </mesh>
-        <mesh rotation={[0, 0, -Math.PI / 4]} position={[data.size * 0.175, 0, 0]}>
-          <boxGeometry args={[data.size * 0.5, data.size * 0.08, data.size * 0.55]} />
-          <meshStandardMaterial color="#dc2626" />
-        </mesh>
-      </group>
-      
-      <mesh position={[0, -data.size * 0.2, data.size * 0.26]}>
-        <boxGeometry args={[data.size * 0.12, data.size * 0.2, data.size * 0.02]} />
-        <meshStandardMaterial color="#854d0e" />
-      </mesh>
-      
-      {[[-0.2, 0], [0.2, 0]].map(([x, y], i) => (
-        <mesh key={i} position={[x * data.size, y * data.size, data.size * 0.26]}>
-          <boxGeometry args={[data.size * 0.1, data.size * 0.1, data.size * 0.02]} />
-          <meshStandardMaterial color="#7dd3fc" emissive="#7dd3fc" emissiveIntensity={0.4} />
-        </mesh>
-      ))}
-      
-      <mesh position={[0, -data.size * 0.4, 0]}>
-        <cylinderGeometry args={[data.size * 0.5, data.size * 0.6, data.size * 0.08, 24]} />
-        <meshStandardMaterial color="#22c55e" />
-      </mesh>
-    </BasePlanet>
-  );
-}
-
-function ContactPlanet(props: PlanetProps) {
-  const { data } = props;
-  const waveRef = useRef<THREE.Group>(null);
-  
-  useFrame(({ clock }) => {
-    if (waveRef.current) {
-      waveRef.current.children.forEach((child, i) => {
-        child.position.y = Math.sin(clock.getElapsedTime() * 3 + i * 0.5) * data.size * 0.1;
-      });
-    }
-  });
-
-  return (
-    <BasePlanet {...props}>
-      <mesh>
-        <boxGeometry args={[data.size * 1.1, data.size * 0.7, data.size * 0.08]} />
-        <meshStandardMaterial color="#f5f5f4" />
-      </mesh>
-      <mesh position={[0, data.size * 0.15, data.size * 0.05]} rotation={[0.4, 0, 0]}>
-        <planeGeometry args={[data.size * 1.05, data.size * 0.5]} />
-        <meshStandardMaterial color="#e5e5e5" side={THREE.DoubleSide} />
-      </mesh>
-      <mesh position={[0, 0, data.size * 0.05]}>
-        <planeGeometry args={[data.size * 0.8, data.size * 0.01]} />
-        <meshStandardMaterial color="#22d3ee" />
-      </mesh>
-      <mesh position={[0, -data.size * 0.15, data.size * 0.05]}>
-        <planeGeometry args={[data.size * 0.6, data.size * 0.01]} />
-        <meshStandardMaterial color="#22d3ee" />
-      </mesh>
-      <group ref={waveRef} position={[0, data.size * 0.6, 0]}>
-        {[0, 1, 2].map((i) => (
-          <mesh key={i} position={[(i - 1) * data.size * 0.2, 0, 0]}>
-            <sphereGeometry args={[data.size * 0.06, 8, 8]} />
-            <meshStandardMaterial color="#22d3ee" emissive="#22d3ee" emissiveIntensity={0.8} />
-          </mesh>
-        ))}
-      </group>
-    </BasePlanet>
-  );
-}
-
-function ReadingPlanet(props: PlanetProps) {
-  const { data } = props;
-  const bookRef = useRef<THREE.Group>(null);
-  
-  useFrame(({ clock }) => {
-    if (bookRef.current) {
-      bookRef.current.rotation.y = Math.sin(clock.getElapsedTime() * 0.3) * 0.15;
-    }
-  });
-
-  return (
-    <BasePlanet {...props}>
-      <group ref={bookRef} rotation={[0, 0, Math.PI / 6]}>
-        <mesh position={[-data.size * 0.25, 0, 0]} rotation={[0, -Math.PI / 6, 0]}>
-          <boxGeometry args={[data.size * 0.5, data.size * 0.7, data.size * 0.15]} />
-          <meshStandardMaterial color="#8b5cf6" />
-        </mesh>
-        <mesh position={[data.size * 0.25, 0, 0]} rotation={[0, Math.PI / 6, 0]}>
-          <boxGeometry args={[data.size * 0.5, data.size * 0.7, data.size * 0.15]} />
-          <meshStandardMaterial color="#8b5cf6" />
-        </mesh>
-        <mesh position={[0, 0, -data.size * 0.08]}>
-          <boxGeometry args={[data.size * 0.1, data.size * 0.7, data.size * 0.15]} />
-          <meshStandardMaterial color="#6d28d9" />
-        </mesh>
-        {[0, 1, 2, 3, 4].map((i) => (
-          <mesh key={i} position={[0, -data.size * 0.25 + i * data.size * 0.125, data.size * 0.01]}>
-            <planeGeometry args={[data.size * 0.45, data.size * 0.1]} />
-            <meshStandardMaterial color="#c4b5fd" />
-          </mesh>
-        ))}
-      </group>
-    </BasePlanet>
   );
 }
 
@@ -557,79 +333,79 @@ export function Galaxy({ onPlanetClick, onPlanetHover, activePlanet }: GalaxyPro
   const planets: PlanetData[] = [
     {
       id: "experience",
-      name: "Experience",
+      name: ORBIT_META.experience.name,
       orbitRadius: 5,
       orbitSpeed: 0.15,
       orbitOffset: 0,
       size: 0.9,
-      color: "#f59e0b",
-      glowColor: "#fbbf24",
+      color: ORBIT_META.experience.solid,
+      glowColor: ORBIT_META.experience.accent,
       emissiveIntensity: 0.4,
     },
     {
       id: "skills",
-      name: "Skills",
+      name: ORBIT_META.skills.name,
       orbitRadius: 7,
       orbitSpeed: 0.12,
       orbitOffset: Math.PI * 0.6,
       size: 0.85,
-      color: "#6366f1",
-      glowColor: "#a5b4fc",
+      color: ORBIT_META.skills.solid,
+      glowColor: ORBIT_META.skills.accent,
       emissiveIntensity: 0.5,
     },
     {
       id: "education",
-      name: "Education",
+      name: ORBIT_META.education.name,
       orbitRadius: 9,
       orbitSpeed: 0.1,
       orbitOffset: Math.PI * 1.2,
       size: 0.8,
-      color: "#10b981",
-      glowColor: "#6ee7b7",
+      color: ORBIT_META.education.solid,
+      glowColor: ORBIT_META.education.accent,
       emissiveIntensity: 0.4,
     },
     {
       id: "projects",
-      name: "Projects",
+      name: ORBIT_META.projects.name,
       orbitRadius: 11,
       orbitSpeed: 0.08,
       orbitOffset: Math.PI * 0.3,
       size: 0.95,
-      color: "#ec4899",
-      glowColor: "#f472b6",
+      color: ORBIT_META.projects.solid,
+      glowColor: ORBIT_META.projects.accent,
       emissiveIntensity: 0.5,
     },
     {
       id: "personal",
-      name: "About Me",
+      name: ORBIT_META.personal.name,
       orbitRadius: 13,
       orbitSpeed: 0.06,
       orbitOffset: Math.PI * 1.5,
       size: 0.75,
-      color: "#f97316",
-      glowColor: "#fb923c",
+      color: ORBIT_META.personal.solid,
+      glowColor: ORBIT_META.personal.accent,
       emissiveIntensity: 0.4,
     },
     {
       id: "contact",
-      name: "Contact",
+      name: ORBIT_META.contact.name,
       orbitRadius: 15,
       orbitSpeed: 0.05,
       orbitOffset: Math.PI * 0.9,
-      size: 0.7,
-      color: "#06b6d4",
-      glowColor: "#22d3ee",
+      size: 0.82,
+      color: ORBIT_META.contact.solid,
+      glowColor: ORBIT_META.contact.accent,
       emissiveIntensity: 0.5,
     },
     {
       id: "reading",
-      name: "Reading",
+      name: ORBIT_META.reading.name,
       orbitRadius: 17,
       orbitSpeed: 0.04,
       orbitOffset: Math.PI * 0.2,
       size: 0.8,
-      color: "#8b5cf6",
-      glowColor: "#a78bfa",
+      color: ORBIT_META.reading.solid,
+      glowColor: ORBIT_META.reading.accent,
       emissiveIntensity: 0.4,
     },
   ];
@@ -653,33 +429,22 @@ export function Galaxy({ onPlanetClick, onPlanetHover, activePlanet }: GalaxyPro
         <OrbitPath key={`orbit-${planet.id}`} radius={planet.orbitRadius} color={planet.glowColor} />
       ))}
       
-      {planets.map((planet) => {
-        const commonProps = {
-          data: planet,
-          onClick: () => onPlanetClick(planet.id),
-          onHover: onPlanetHover,
-          isActive: activePlanet === planet.id,
-        };
-        
-        switch (planet.id) {
-          case "experience":
-            return <ExperiencePlanet key={planet.id} {...commonProps} />;
-          case "skills":
-            return <SkillsPlanet key={planet.id} {...commonProps} />;
-          case "education":
-            return <EducationPlanet key={planet.id} {...commonProps} />;
-          case "projects":
-            return <ProjectsPlanet key={planet.id} {...commonProps} />;
-          case "personal":
-            return <PersonalPlanet key={planet.id} {...commonProps} />;
-          case "contact":
-            return <ContactPlanet key={planet.id} {...commonProps} />;
-          case "reading":
-            return <ReadingPlanet key={planet.id} {...commonProps} />;
-          default:
-            return null;
-        }
-      })}
+      {planets.map((planet) => (
+        <BasePlanet
+          key={planet.id}
+          data={planet}
+          onClick={() => onPlanetClick(planet.id)}
+          onHover={onPlanetHover}
+          isActive={activePlanet === planet.id}
+        >
+          <OrbitalArtifact
+            id={planet.id}
+            size={planet.size}
+            solidColor={planet.color}
+            accentColor={planet.glowColor}
+          />
+        </BasePlanet>
+      ))}
 
       <BackgroundStars count={500} />
 

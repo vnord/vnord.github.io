@@ -1,20 +1,18 @@
 "use client";
 
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, Stars } from "@react-three/drei";
 import { Suspense, useRef, useMemo, useState, useEffect } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { Galaxy } from "./Galaxy";
 
-function CosmicDust() {
+function CosmicDust({ count = 1000 }: { count?: number }) {
   const ref = useRef<THREE.Points>(null);
 
   const particles = useMemo(() => {
-    const count = 1000;
     const pos = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
-    const sizes = new Float32Array(count);
 
     for (let i = 0; i < count; i++) {
       const radius = 15 + Math.random() * 40;
@@ -36,10 +34,9 @@ function CosmicDust() {
         colors[i * 3] = 1.0; colors[i * 3 + 1] = 0.5; colors[i * 3 + 2] = 0.7;
       }
 
-      sizes[i] = 0.5 + Math.random() * 1.5;
     }
-    return { positions: pos, colors, sizes };
-  }, []);
+    return { positions: pos, colors };
+  }, [count]);
 
   useFrame(({ clock }) => {
     if (ref.current) {
@@ -91,13 +88,13 @@ function NebulaCloud({ position, color, scale = 1 }: { position: [number, number
   );
 }
 
-function AmbientStars() {
+function AmbientStars({ compact = false }: { compact?: boolean }) {
   return (
     <>
       <Stars
         radius={200}
         depth={100}
-        count={10000}
+        count={compact ? 2600 : 10000}
         factor={5}
         saturation={0.3}
         fade
@@ -106,7 +103,7 @@ function AmbientStars() {
       <Stars
         radius={150}
         depth={80}
-        count={3000}
+        count={compact ? 700 : 3000}
         factor={3}
         saturation={0.5}
         fade
@@ -134,14 +131,67 @@ interface SceneContentProps {
   onPlanetClick: (id: string) => void;
   onPlanetHover: (id: string | null, screenPos: { x: number; y: number } | null) => void;
   activePlanet: string | null;
+  viewportMode: ViewportMode;
 }
 
-function SceneContent({ onPlanetClick, onPlanetHover, activePlanet }: SceneContentProps) {
+type ViewportMode = "desktop" | "compact-landscape" | "phone-portrait";
+
+interface CameraConfig {
+  position: [number, number, number];
+  target: [number, number, number];
+  fov: number;
+  minDistance: number;
+  maxDistance: number;
+}
+
+const cameraConfigs: Record<ViewportMode, CameraConfig> = {
+  desktop: {
+    position: [15, 8, 20],
+    target: [0, 0, 0],
+    fov: 45,
+    minDistance: 12,
+    maxDistance: 50,
+  },
+  "compact-landscape": {
+    position: [23, 14, 35],
+    target: [0, -1, 0],
+    fov: 52,
+    minDistance: 20,
+    maxDistance: 64,
+  },
+  "phone-portrait": {
+    position: [32, 20, 51],
+    target: [0, -2.4, 0],
+    fov: 58,
+    minDistance: 34,
+    maxDistance: 90,
+  },
+};
+
+function ResponsiveCamera({ config }: { config: CameraConfig }) {
+  const { camera } = useThree();
+
+  useEffect(() => {
+    const perspectiveCamera = camera as THREE.PerspectiveCamera;
+    perspectiveCamera.position.set(...config.position);
+    perspectiveCamera.fov = config.fov;
+    perspectiveCamera.lookAt(...config.target);
+    perspectiveCamera.updateProjectionMatrix();
+  }, [camera, config]);
+
+  return null;
+}
+
+function SceneContent({ onPlanetClick, onPlanetHover, activePlanet, viewportMode }: SceneContentProps) {
+  const cameraConfig = cameraConfigs[viewportMode];
+  const isCompact = viewportMode !== "desktop";
+
   return (
     <>
+      <ResponsiveCamera config={cameraConfig} />
       <GalaxyLighting />
-      <AmbientStars />
-      <CosmicDust />
+      <AmbientStars compact={isCompact} />
+      <CosmicDust count={isCompact ? 280 : 1000} />
       
       <NebulaCloud position={[30, 5, -20]} color="#7c3aed" scale={1.5} />
       <NebulaCloud position={[-25, -8, 15]} color="#ec4899" scale={1.2} />
@@ -155,10 +205,11 @@ function SceneContent({ onPlanetClick, onPlanetHover, activePlanet }: SceneConte
 
       <OrbitControls
         makeDefault
+        target={cameraConfig.target}
         enablePan={false}
         enableZoom={true}
-        minDistance={12}
-        maxDistance={50}
+        minDistance={cameraConfig.minDistance}
+        maxDistance={cameraConfig.maxDistance}
         autoRotate
         autoRotateSpeed={0.15}
         dampingFactor={0.05}
@@ -181,30 +232,42 @@ export function Scene({
   onHotspotHoverAction,
   activeHotspot,
 }: SceneProps) {
-  const [isMobile, setIsMobile] = useState(false);
+  const [viewportMode, setViewportMode] = useState<ViewportMode>("desktop");
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
+    const checkViewport = () => {
+      const { innerWidth: width, innerHeight: height } = window;
+
+      if (width <= 768 && height > width) {
+        setViewportMode("phone-portrait");
+      } else if (width <= 900 || height <= 600) {
+        setViewportMode("compact-landscape");
+      } else {
+        setViewportMode("desktop");
+      }
     };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+
+    checkViewport();
+    window.addEventListener("resize", checkViewport);
+    return () => window.removeEventListener("resize", checkViewport);
   }, []);
+
+  const cameraConfig = cameraConfigs[viewportMode];
+  const isCompact = viewportMode !== "desktop";
   
   return (
     <div className="canvas-container">
       <Canvas
         camera={{ 
-          position: isMobile ? [18, 10, 25] : [15, 8, 20], 
-          fov: isMobile ? 50 : 45 
+          position: cameraConfig.position,
+          fov: cameraConfig.fov,
         }}
         gl={{ 
           antialias: true, 
           alpha: true,
           powerPreference: "high-performance",
         }}
-        dpr={isMobile ? [1, 1.5] : [1, 2]}
+        dpr={isCompact ? [1, 1.35] : [1, 2]}
         style={{ touchAction: "none" }}
       >
         <Suspense fallback={null}>
@@ -212,6 +275,7 @@ export function Scene({
             onPlanetClick={onHotspotClickAction}
             onPlanetHover={onHotspotHoverAction}
             activePlanet={activeHotspot}
+            viewportMode={viewportMode}
           />
         </Suspense>
       </Canvas>

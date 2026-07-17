@@ -1,6 +1,8 @@
+import { OrbitIcon } from "../OrbitIcon";
+
 export const contact = {
   title: "Get in Touch",
-  icon: "✉️",
+  icon: <OrbitIcon name="contact" />,
   content: (
     <div className="space-y-6">
       <div className="space-y-3">
@@ -50,11 +52,11 @@ export const contact = {
       </div>
 
       <div className="mt-6 p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-        <p className="text-sm text-[var(--muted)]">
-          📍 Based in Zürich, Switzerland
+        <p className="contact-location">
+          <OrbitIcon name="location" size={16} />
+          Based in Zürich, Switzerland
         </p>
       </div>
     </div>
   ),
 };
-

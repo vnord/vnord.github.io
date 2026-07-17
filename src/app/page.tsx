@@ -2,8 +2,13 @@
 
 import { useState, useEffect, useCallback } from "react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { InfoPanel } from "@/components/Planet/InfoPanel";
 import { PlanetTooltip } from "@/components/Planet/PlanetTooltip";
+import { OrbitIcon } from "@/components/Planet/OrbitIcon";
+import { ORBIT_META, ORBIT_ORDER } from "@/components/Planet/orbitSystem";
+
+const destinations = ORBIT_ORDER.map((id) => ({ id, ...ORBIT_META[id] }));
 
 const Scene = dynamic(
   () => import("@/components/Planet/Scene").then((mod) => mod.Scene),
@@ -16,19 +21,11 @@ const Scene = dynamic(
 function LoadingScreen() {
   return (
     <div className="loading-screen">
-      <div className="loading-galaxy">
-        <div className="loading-star" />
-        <div className="loading-orbit loading-orbit-1">
-          <div className="loading-planet" />
-        </div>
-        <div className="loading-orbit loading-orbit-2">
-          <div className="loading-planet loading-planet-2" />
-        </div>
-        <div className="loading-orbit loading-orbit-3">
-          <div className="loading-planet loading-planet-3" />
-        </div>
+      <div className="loading-brand" aria-hidden="true">
+        <Image className="loading-mark" src="/orbit-mark.svg" alt="" width={96} height={96} priority />
+        <span className="loading-scan" />
       </div>
-      <p className="loading-text">Entering the galaxy...</p>
+      <p className="loading-text">Calibrating orbits</p>
     </div>
   );
 }
@@ -37,6 +34,7 @@ function IntroOverlay({ onDismiss, isMobile }: { onDismiss: () => void; isMobile
   const [fadeOut, setFadeOut] = useState(false);
 
   const handleDismiss = () => {
+    if (fadeOut) return;
     setFadeOut(true);
     setTimeout(onDismiss, 500);
   };
@@ -44,33 +42,29 @@ function IntroOverlay({ onDismiss, isMobile }: { onDismiss: () => void; isMobile
   return (
     <div
       className={`intro-overlay ${fadeOut ? "fade-out" : ""}`}
-      onClick={handleDismiss}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => e.key === "Enter" && handleDismiss()}
     >
-      <div className="intro-stars" />
-      
+      <button
+        className="intro-dismiss-surface"
+        onPointerDown={(event) => {
+          if (event.button === 0) handleDismiss();
+        }}
+        onClick={handleDismiss}
+        aria-label="Enter the planetary system"
+      />
+      <div className="intro-stars" aria-hidden="true" />
+
       <div className="intro-content">
         <h1 className="intro-title">Ari von Nordenskjöld</h1>
-        
-        <div className="intro-role">
-          <span className="role-line" />
-          <span className="role-text">Exploring technology and building cool stuff</span>
-          <span className="role-line" />
-        </div>
-        
-        <p className="intro-location">
-          <svg className="location-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-          Zürich, Switzerland
+
+        <p className="intro-role">Exploring technology and building cool stuff.</p>
+
+        <button className="intro-cta" onClick={handleDismiss}>
+          <span>Enter the system</span>
+          <OrbitIcon className="cta-arrow" name="arrow" size={17} />
+        </button>
+        <p className="intro-footnote">
+          {isMobile ? "Drag to orbit · pinch to zoom" : "Drag to orbit · scroll to zoom"}
         </p>
-        
-        <div className="intro-cta">
-          <span>{isMobile ? "Tap anywhere to begin" : "Click anywhere to begin"}</span>
-        </div>
       </div>
     </div>
   );
@@ -80,10 +74,37 @@ function Header() {
   return (
     <header className="site-header">
       <div className="site-title">
-        <span className="title-star">✦</span>
-        vnord.net
+        <Image className="site-mark" src="/mark.svg" alt="" width={28} height={28} priority aria-hidden="true" />
+        <span>vnord.net</span>
       </div>
     </header>
+  );
+}
+
+function OrbitIndex({ onSelect }: { onSelect: (id: string) => void }) {
+  return (
+    <nav className="orbit-index" aria-label="Explore the planetary system">
+      <div className="orbit-index-heading">
+        <span>Orbit index</span>
+      </div>
+      <ol>
+        {destinations.map((destination, index) => (
+          <li key={destination.id}>
+            <button onClick={() => onSelect(destination.id)}>
+              <span className="orbit-number">{String(index + 1).padStart(2, "0")}</span>
+              <OrbitIcon
+                className="orbit-index-icon"
+                name={destination.icon}
+                size={14}
+                style={{ color: destination.accent }}
+              />
+              <span className="orbit-label">{destination.navLabel}</span>
+              <OrbitIcon className="orbit-arrow" name="arrow" size={14} />
+            </button>
+          </li>
+        ))}
+      </ol>
+    </nav>
   );
 }
 
@@ -182,11 +203,7 @@ export default function Home() {
         <Header />
 
         {!showIntro && !activeHotspot && (
-          <div className="controls-hint">
-            <span>{isMobile ? "Pan to orbit" : "Drag to orbit"}</span>
-            <span className="hint-dot">•</span>
-            <span>{isMobile ? "Pinch to zoom" : "Scroll to zoom"}</span>
-          </div>
+          <OrbitIndex onSelect={handleHotspotClick} />
         )}
 
         {!activeHotspot && (
